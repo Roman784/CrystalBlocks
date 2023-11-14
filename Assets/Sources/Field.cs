@@ -6,7 +6,7 @@ public class Field : MonoBehaviour
 {
     public static Field Instance; 
 
-    [SerializeField] private Vector3Int _fieldSize;
+    [SerializeField] private Cell[] _allCells;
     private Cell[,] _cells;
 
     private void Awake()
@@ -14,11 +14,30 @@ public class Field : MonoBehaviour
         if (Instance != null && Instance != this) Destroy(gameObject);
         Instance = this;
 
-        _cells = new Cell[_fieldSize.x, _fieldSize.y];
+        InitField();
     }
 
     public bool TryToPlace(Block[] blocks)
     {
         return false;
     }
+
+    private void InitField()
+    {
+        Vector2Int fieldSize = Vector2Int.zero;
+        Vector2Int minCellPosition = Vector2Int.zero;
+        Vector2Int maxCellPosition = Vector2Int.zero;
+
+        foreach (Cell cell in _allCells)
+        {
+            if (cell.transform.localPosition.x < minCellPosition.x) minCellPosition.x = (int)cell.transform.localPosition.x;
+            if (cell.transform.localPosition.y < minCellPosition.y) minCellPosition.y = (int)cell.transform.localPosition.y;
+            if (cell.transform.localPosition.x > maxCellPosition.x) maxCellPosition.x = (int)cell.transform.localPosition.x;
+            if (cell.transform.localPosition.y > maxCellPosition.y) maxCellPosition.y = (int)cell.transform.localPosition.y;
+        }
+
+        fieldSize = maxCellPosition - minCellPosition + Vector2Int.one;
+
+        _cells = new Cell[fieldSize.x, fieldSize.y];
+    }    
 }
