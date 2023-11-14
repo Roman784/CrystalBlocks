@@ -5,15 +5,10 @@ using UnityEngine;
 
 public class LineChecker : MonoBehaviour
 {
-    private void Start()
+    // Ќаходит блоки на заполненных лини€х и возвращает HashSet из них.
+    public HashSet<Block> Check()
     {
-        Field.Instance.FigurePlaced.AddListener(Check);
-    }
-
-    // Ќаходит блоки на заполненных лини€х.
-    private void Check()
-    {
-        HashSet<Block> blocksInFilledLine = new HashSet<Block>();
+        HashSet<Block> blocksOnFilledLines = new HashSet<Block>();
         Cell[,] cellMatrix = Field.Instance.GetCellMatrix();
 
         // ƒобавление горизонтальных клеток.
@@ -28,10 +23,10 @@ public class LineChecker : MonoBehaviour
                     break;
                 }
 
-                blocksInFilledLine.Add(cellMatrix[x, y].OwnedBlock);
+                blocks.Add(cellMatrix[x, y].OwnedBlock);
             }
 
-            blocks.AddRange(blocks);
+            blocksOnFilledLines.AddRange(blocks);
         }
 
         // ƒобавление вертикальных клеток.
@@ -49,7 +44,9 @@ public class LineChecker : MonoBehaviour
                 blocks.Add(cellMatrix[x, y].OwnedBlock);
             }
 
-            blocksInFilledLine.AddRange(blocks);
+            blocksOnFilledLines.AddRange(blocks);
         }
+
+        return blocksOnFilledLines;
     }
 }
