@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Field : MonoBehaviour
 {
     public static Field Instance; 
 
     [SerializeField] private Cell[] _allCells;
-    private Cell[,] _cells;
+    private Cell[,] _cellmatrix;
 
     [Space]
 
     [SerializeField] private float _distanceToPlaceBlock; // Погрешность при размещении блоков.
+
+    public UnityEvent FigurePlaced = new UnityEvent();
 
     private void Awake()
     {
@@ -49,6 +52,8 @@ public class Field : MonoBehaviour
         PlaceBlocks(blocksByCell);
         Destroy(figure.gameObject);
 
+        FigurePlaced.Invoke();
+
         return true;
     }
 
@@ -82,6 +87,16 @@ public class Field : MonoBehaviour
 
         fieldSize = maxCellPosition - minCellPosition + Vector2Int.one;
 
-        _cells = new Cell[fieldSize.x, fieldSize.y];
-    }    
+        _cellmatrix = new Cell[fieldSize.x, fieldSize.y];
+
+        foreach (Cell cell in _allCells)
+        {
+            int x = (int)cell.transform.localPosition.x;
+            int y = (int)cell.transform.localPosition.y;
+
+            _cellmatrix[x, y] = cell;
+        }
+    }
+
+    public Cell[,] GetCellMatrix() => _cellmatrix;
 }
