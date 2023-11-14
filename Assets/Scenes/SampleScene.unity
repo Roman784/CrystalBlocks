@@ -917,6 +917,7 @@ MonoBehaviour:
   - {fileID: 754929678}
   - {fileID: 2048178802}
   - {fileID: 2014464650}
+  _distanceToPlaceBlock: 0.5
 --- !u!4 &766749272
 Transform:
   m_ObjectHideFlags: 0

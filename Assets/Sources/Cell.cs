@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-    
+    public Block OwnedBlock;
+    public bool IsEmpty => OwnedBlock == null;
 }

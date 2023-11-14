@@ -9,6 +9,10 @@ public class Field : MonoBehaviour
     [SerializeField] private Cell[] _allCells;
     private Cell[,] _cells;
 
+    [Space]
+
+    [SerializeField] private float _distanceToPlaceBlock; // Погрешность при размещении блоков.
+
     private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(gameObject);
@@ -17,9 +21,49 @@ public class Field : MonoBehaviour
         InitField();
     }
 
-    public bool TryToPlace(Block[] blocks)
+    // Размещает фигуру на поле и возвращает true или false в зависимости от результата.
+    // true - все блоки размещены, false - хотя бы 1 блок не размещён.
+    public bool TryToPlaceFigure(Figure figure)
     {
-        return false;
+        Dictionary<Cell, Block> blocksByCell = new Dictionary<Cell, Block>(); // Клетка и блок, который будет на ней размещён.
+
+        foreach (Block block in figure.GetBlocks())
+        {
+            bool canPlace = false; // Нашлась ли клетка для размещения данного блока.
+            foreach (Cell cell in _allCells)
+            {
+                float distance = Vector2.Distance(block.transform.position, cell.transform.position);
+                if (distance < _distanceToPlaceBlock && cell.IsEmpty)
+                {
+                    canPlace = true;
+                    blocksByCell.Add(cell, block);
+
+                    continue;
+                }
+            }
+
+            if (!canPlace) // Если хотя бы 1 блок не смог разместиться, остальные также не размещаются.
+                return false;
+        }
+
+        PlaceBlocks(blocksByCell);
+        Destroy(figure.gameObject);
+
+        return true;
+    }
+
+    // Размещает блоки на клетки соответственно переданному словарю.
+    private void PlaceBlocks(Dictionary<Cell, Block> blocksByCell)
+    {
+        foreach (var item in blocksByCell)
+        {
+            Cell cell = item.Key;
+            Block block = item.Value;
+
+            cell.OwnedBlock = block;
+            block.transform.SetParent(cell.transform);
+            block.transform.localPosition = Vector3.zero;
+        }
     }
 
     private void InitField()

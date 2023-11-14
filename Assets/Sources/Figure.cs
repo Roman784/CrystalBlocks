@@ -31,14 +31,16 @@ public class Figure : MonoBehaviour
     {
         _isMouseDown = false;
 
-        Field.Instance.TryToPlace(_blocks);
+        bool placementResult = Field.Instance.TryToPlaceFigure(this);
     }
 
     public void Move()
     {
-        if (_isMouseDown == false) return;
+        if (!_isMouseDown) return;
 
         Vector2 position = (Vector2)(_camera.ScreenToWorldPoint(Input.mousePosition)) - _startMousePosition;
         transform.position = position;
     }
+
+    public Block[] GetBlocks() => _blocks;
 }
