@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blocks: []
+  _revertSpeed: 60
 --- !u!60 &5174484951703048307
 PolygonCollider2D:
   m_ObjectHideFlags: 0

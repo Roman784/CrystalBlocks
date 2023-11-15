@@ -9,6 +9,11 @@ public class Figure : MonoBehaviour
     private bool _isMouseDown;
     private Vector2 _startMousePosition;
 
+    [Space]
+
+    [SerializeField] private float _revertSpeed;
+    private Vector2 _initialPosition;
+
     private Camera _camera;
 
     private void Start()
@@ -19,6 +24,11 @@ public class Figure : MonoBehaviour
     private void Update()
     {
         FollowMouse();
+    }
+
+    public void Init(Vector2 initialPosition)
+    {
+        _initialPosition = initialPosition;
     }
 
     public void OnMouseDown()
@@ -32,6 +42,9 @@ public class Figure : MonoBehaviour
         _isMouseDown = false;
 
         bool placementResult = Field.Instance.TryToPlaceFigure(this);
+
+        if (!placementResult)
+            StartCoroutine(RevertToInitialPosition());
     }
 
     public void FollowMouse()
@@ -40,6 +53,15 @@ public class Figure : MonoBehaviour
 
         Vector2 position = (Vector2)(_camera.ScreenToWorldPoint(Input.mousePosition)) - _startMousePosition;
         transform.position = position;
+    }
+
+    private IEnumerator RevertToInitialPosition()
+    {
+        while ((Vector2)transform.position != _initialPosition)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, _initialPosition, _revertSpeed * Time.deltaTime);
+            yield return null;
+        }
     }
 
     public void Destroy()
