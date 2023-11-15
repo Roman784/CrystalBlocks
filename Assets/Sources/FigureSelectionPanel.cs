@@ -11,6 +11,8 @@ public class FigureSelectionPanel : MonoBehaviour
 
     [SerializeField]private List<Figure> _spawnedFigures = new List<Figure>();
 
+    private float[] _rotateAngles = new float[4] { 0f, 90f , 180f, 270f };
+
     private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(gameObject);
@@ -21,7 +23,8 @@ public class FigureSelectionPanel : MonoBehaviour
 
     public void RemoveFigure(Figure figure)
     {
-        _spawnedFigures.Remove(figure);
+        int index = _spawnedFigures.IndexOf(figure);
+        _spawnedFigures[index] = null;
     }
 
     // Проверяет количество фигур на панели, если их не осталось - создаёт новые.
@@ -48,7 +51,11 @@ public class FigureSelectionPanel : MonoBehaviour
         for (int i = 0; i < _points.Length; i++)
         {
             Figure newFigure = Instantiate(_figurePrefabs[Random.Range(0, _figurePrefabs.Length)]);
+
+            float angle = _rotateAngles[Random.Range(0, _rotateAngles.Length)];
+
             newFigure.transform.position = _points[i].position;
+            newFigure.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
 
             _spawnedFigures.Add(newFigure);
         }

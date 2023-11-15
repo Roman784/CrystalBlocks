@@ -73,10 +73,10 @@ public class Field : MonoBehaviour
 
     private void InitField()
     {
-        Vector2Int fieldSize = Vector2Int.zero;
         Vector2Int minCellPosition = Vector2Int.zero;
         Vector2Int maxCellPosition = Vector2Int.zero;
 
+        // Ќаходит минимальные и максимальные координаты позиций клеток.
         foreach (Cell cell in _allCells)
         {
             if (cell.transform.localPosition.x < minCellPosition.x) minCellPosition.x = (int)cell.transform.localPosition.x;
@@ -85,10 +85,11 @@ public class Field : MonoBehaviour
             if (cell.transform.localPosition.y > maxCellPosition.y) maxCellPosition.y = (int)cell.transform.localPosition.y;
         }
 
-        fieldSize = maxCellPosition - minCellPosition + Vector2Int.one;
+        Vector2Int fieldSize = maxCellPosition - minCellPosition + Vector2Int.one;
 
         _cellmatrix = new Cell[fieldSize.x, fieldSize.y];
 
+        // «аполн€ет матрицу клеток.
         foreach (Cell cell in _allCells)
         {
             int x = (int)cell.transform.localPosition.x;

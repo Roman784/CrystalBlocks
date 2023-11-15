@@ -18,7 +18,7 @@ public class Figure : MonoBehaviour
 
     private void Update()
     {
-        Move();
+        FollowMouse();
     }
 
     public void OnMouseDown()
@@ -34,7 +34,7 @@ public class Figure : MonoBehaviour
         bool placementResult = Field.Instance.TryToPlaceFigure(this);
     }
 
-    public void Move()
+    public void FollowMouse()
     {
         if (!_isMouseDown) return;
 
