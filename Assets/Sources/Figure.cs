@@ -6,7 +6,7 @@ public class Figure : MonoBehaviour
 {
     [SerializeField] private Block[] _blocks;
 
-    private bool _isMouseDown;
+    private bool _isMousePressed;
     private Vector2 _startMousePosition;
 
     [Space]
@@ -21,35 +21,37 @@ public class Figure : MonoBehaviour
         _camera = Camera.main;
     }
 
-    private void Update()
-    {
-        FollowMouse();
-    }
-
     public void Init(Vector2 initialPosition)
     {
         _initialPosition = initialPosition;
     }
 
+    private void Update()
+    {
+        FollowMouse();
+    } 
+
     public void OnMouseDown()
     {
-        _isMouseDown = true;
+        _isMousePressed = true;
         _startMousePosition = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
     }
 
     public void OnMouseUp()
     {
-        _isMouseDown = false;
+        _isMousePressed = false;
 
         bool placementResult = Field.Instance.TryToPlaceFigure(this);
 
         if (!placementResult)
+        {
             StartCoroutine(RevertToInitialPosition());
+        }
     }
 
     public void FollowMouse()
     {
-        if (!_isMouseDown) return;
+        if (!_isMousePressed) return;
 
         Vector2 position = (Vector2)(_camera.ScreenToWorldPoint(Input.mousePosition)) - _startMousePosition;
         transform.position = position;
@@ -70,5 +72,5 @@ public class Figure : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public Block[] GetBlocks() => _blocks;
+    public IEnumerable GetBlocks() => _blocks;
 }

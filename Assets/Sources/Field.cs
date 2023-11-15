@@ -23,6 +23,34 @@ public class Field : MonoBehaviour
         InitField();
     }
 
+    private void InitField()
+    {
+        Vector2Int minCellPosition = Vector2Int.zero;
+        Vector2Int maxCellPosition = Vector2Int.zero;
+
+        // Ќаходит минимальные и максимальные координаты позиций клеток.
+        foreach (Cell cell in _allCells)
+        {
+            if (cell.transform.localPosition.x < minCellPosition.x) minCellPosition.x = (int)cell.transform.localPosition.x;
+            if (cell.transform.localPosition.y < minCellPosition.y) minCellPosition.y = (int)cell.transform.localPosition.y;
+            if (cell.transform.localPosition.x > maxCellPosition.x) maxCellPosition.x = (int)cell.transform.localPosition.x;
+            if (cell.transform.localPosition.y > maxCellPosition.y) maxCellPosition.y = (int)cell.transform.localPosition.y;
+        }
+
+        Vector2Int fieldSize = maxCellPosition - minCellPosition + Vector2Int.one;
+
+        _cellmatrix = new Cell[fieldSize.x, fieldSize.y];
+
+        // «аполн€ет матрицу клеток.
+        foreach (Cell cell in _allCells)
+        {
+            int x = (int)cell.transform.localPosition.x;
+            int y = (int)cell.transform.localPosition.y;
+
+            _cellmatrix[x, y] = cell;
+        }
+    }
+
     // –азмещает фигуру на поле и возвращает true или false в зависимости от результата.
     // true - все блоки размещены, false - хот€ бы 1 блок не размещЄн.
     public bool TryToPlaceFigure(Figure figure)
@@ -67,34 +95,6 @@ public class Field : MonoBehaviour
             cell.OwnedBlock = block;
             block.transform.SetParent(cell.transform);
             block.transform.localPosition = Vector3.zero;
-        }
-    }
-
-    private void InitField()
-    {
-        Vector2Int minCellPosition = Vector2Int.zero;
-        Vector2Int maxCellPosition = Vector2Int.zero;
-
-        // Ќаходит минимальные и максимальные координаты позиций клеток.
-        foreach (Cell cell in _allCells)
-        {
-            if (cell.transform.localPosition.x < minCellPosition.x) minCellPosition.x = (int)cell.transform.localPosition.x;
-            if (cell.transform.localPosition.y < minCellPosition.y) minCellPosition.y = (int)cell.transform.localPosition.y;
-            if (cell.transform.localPosition.x > maxCellPosition.x) maxCellPosition.x = (int)cell.transform.localPosition.x;
-            if (cell.transform.localPosition.y > maxCellPosition.y) maxCellPosition.y = (int)cell.transform.localPosition.y;
-        }
-
-        Vector2Int fieldSize = maxCellPosition - minCellPosition + Vector2Int.one;
-
-        _cellmatrix = new Cell[fieldSize.x, fieldSize.y];
-
-        // «аполн€ет матрицу клеток.
-        foreach (Cell cell in _allCells)
-        {
-            int x = (int)cell.transform.localPosition.x;
-            int y = (int)cell.transform.localPosition.y;
-
-            _cellmatrix[x, y] = cell;
         }
     }
 
