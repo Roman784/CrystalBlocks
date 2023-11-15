@@ -42,5 +42,11 @@ public class Figure : MonoBehaviour
         transform.position = position;
     }
 
+    public void Destroy()
+    {
+        FigureSelectionPanel.Instance.RemoveFigure(this);
+        Destroy(gameObject);
+    }
+
     public Block[] GetBlocks() => _blocks;
 }

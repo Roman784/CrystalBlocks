@@ -6,6 +6,7 @@ public class GameLoop : MonoBehaviour
 {
     [SerializeField] private LineChecker _lineChecker;
     [SerializeField] private BlocksDestroyer _blocksDestroyer;
+    [SerializeField] private FigureSelectionPanel _figureSelectionPanel;
 
     private void Start()
     {
@@ -16,5 +17,6 @@ public class GameLoop : MonoBehaviour
     {
         HashSet<Block> blocksOnFilledLines = _lineChecker.Check();
         _blocksDestroyer.Destroy(blocksOnFilledLines);
+        _figureSelectionPanel.CheckAvailability();
     }
 }

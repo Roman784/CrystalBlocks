@@ -50,7 +50,7 @@ public class Field : MonoBehaviour
         }
 
         PlaceBlocks(blocksByCell);
-        Destroy(figure.gameObject);
+        figure.Destroy();
 
         FigurePlaced.Invoke();
 
