@@ -15,7 +15,7 @@ public class FigureSelectionPanel : MonoBehaviour
 
     private void Awake()
     {
-        Instance = Singlton.Get<FigureSelectionPanel>();
+        Instance = Singleton.Get<FigureSelectionPanel>();
 
         CheckAvailability();
     }

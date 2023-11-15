@@ -18,7 +18,7 @@ public class Field : MonoBehaviour
 
     private void Awake()
     {
-        Instance = Singlton.Get<Field>();
+        Instance = Singleton.Get<Field>();
 
         InitField();
     }

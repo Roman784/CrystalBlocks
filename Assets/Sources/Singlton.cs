@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public static class Singlton
+public static class Singleton
 {
     public static T Get<T>() where T : MonoBehaviour
     {
