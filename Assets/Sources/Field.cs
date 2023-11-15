@@ -84,7 +84,7 @@ public class Field : MonoBehaviour
         return true;
     }
 
-    // Размещает блоки на клетки соответственно переданному словарю.
+    // Размещает блоки на клетки согласно переданному словарю.
     private void PlaceBlocks(Dictionary<Cell, Block> blocksByCell)
     {
         foreach (var item in blocksByCell)
@@ -92,9 +92,7 @@ public class Field : MonoBehaviour
             Cell cell = item.Key;
             Block block = item.Value;
 
-            cell.OwnedBlock = block;
-            block.transform.SetParent(cell.transform);
-            block.transform.localPosition = Vector3.zero;
+            block.Place(cell);
         }
     }
 
