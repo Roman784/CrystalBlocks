@@ -1050,7 +1050,7 @@ MonoBehaviour:
   - {fileID: 754929678}
   - {fileID: 2048178802}
   - {fileID: 2014464650}
-  _distanceToPlaceBlock: 0.5
+  _distanceToPlaceBlock: 0.75
   FigurePlaced:
     m_PersistentCalls:
       m_Calls: []
@@ -1187,7 +1187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaf419a0f0b6a4f4f823a80ed9c5ea57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lineChecker: {fileID: 0}
 --- !u!1001 &1256374417
 PrefabInstance:
   m_ObjectHideFlags: 0

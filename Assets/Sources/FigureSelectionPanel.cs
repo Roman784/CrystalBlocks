@@ -15,8 +15,7 @@ public class FigureSelectionPanel : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this) Destroy(gameObject);
-        Instance = this;
+        Instance = Singlton.Get<FigureSelectionPanel>();
 
         CheckAvailability();
     }
