@@ -15,7 +15,7 @@ public class GameLoop : MonoBehaviour
 
     private void StartLoop()
     {
-        HashSet<Block> blocksOnFilledLines = _lineChecker.Check();
+        HashSet<Block> blocksOnFilledLines = _lineChecker.GetBlocksOnFilledLines();
         _blocksDestroyer.Destroy(blocksOnFilledLines);
         _figureSelectionPanel.CheckAvailability();
     }

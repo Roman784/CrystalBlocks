@@ -8,7 +8,7 @@ public class BlocksDestroyer : MonoBehaviour
     {
         foreach (Block block in blocks)
         {
-            block.Destroy();
+            block?.Destroy();
         }
     }
 }
