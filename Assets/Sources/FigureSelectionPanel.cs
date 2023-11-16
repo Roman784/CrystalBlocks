@@ -9,7 +9,7 @@ public class FigureSelectionPanel : MonoBehaviour
     [SerializeField] private Figure[] _figurePrefabs;
     [SerializeField] private Transform[] _points; // “очки, на которых будут размещены фигуры.
 
-    [SerializeField]private List<Figure> _spawnedFigures = new List<Figure>();
+    private List<Figure> _spawnedFigures = new List<Figure>();
 
     private float[] _rotateAngles = new float[4] { 0f, 90f , 180f, 270f };
 

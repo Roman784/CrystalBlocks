@@ -308,7 +308,6 @@ MonoBehaviour:
   - {fileID: 1388891056}
   - {fileID: 1869390186}
   - {fileID: 716945228}
-  _spawnedFigures: []
 --- !u!4 &87033505
 Transform:
   m_ObjectHideFlags: 0
@@ -2881,7 +2880,7 @@ MonoBehaviour:
   - {fileID: 812220818}
   - {fileID: 1048186169}
   - {fileID: 1070768871}
-  _distanceToPlaceBlock: 0.5
+  _distanceToPlaceBlock: 0.4
   FigurePlaced:
     m_PersistentCalls:
       m_Calls: []

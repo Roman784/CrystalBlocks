@@ -31,10 +31,10 @@ public class Field : MonoBehaviour
         // Ќаходит минимальные и максимальные координаты позиций клеток.
         foreach (Cell cell in _allCells)
         {
-            if (cell.transform.localPosition.x < minCellPosition.x) minCellPosition.x = (int)cell.transform.localPosition.x;
-            if (cell.transform.localPosition.y < minCellPosition.y) minCellPosition.y = (int)cell.transform.localPosition.y;
-            if (cell.transform.localPosition.x > maxCellPosition.x) maxCellPosition.x = (int)cell.transform.localPosition.x;
-            if (cell.transform.localPosition.y > maxCellPosition.y) maxCellPosition.y = (int)cell.transform.localPosition.y;
+            if (cell.Coordinates.x < minCellPosition.x) minCellPosition.x = cell.Coordinates.x;
+            if (cell.Coordinates.y < minCellPosition.y) minCellPosition.y = cell.Coordinates.y;
+            if (cell.Coordinates.x > maxCellPosition.x) maxCellPosition.x = cell.Coordinates.x;
+            if (cell.Coordinates.y > maxCellPosition.y) maxCellPosition.y = cell.Coordinates.y;
         }
 
         Vector2Int fieldSize = maxCellPosition - minCellPosition + Vector2Int.one;
@@ -44,12 +44,14 @@ public class Field : MonoBehaviour
         // «аполн€ет матрицу клеток.
         foreach (Cell cell in _allCells)
         {
-            int x = (int)cell.transform.localPosition.x;
-            int y = (int)cell.transform.localPosition.y;
+            int x = cell.Coordinates.x;
+            int y = cell.Coordinates.y;
 
             _cellmatrix[x, y] = cell;
         }
     }
+
+    public Cell[,] GetCellMatrix() => _cellmatrix;
 
     // –азмещает фигуру на поле и возвращает true или false в зависимости от результата.
     // true - все блоки размещены, false - хот€ бы 1 блок не размещЄн.
@@ -63,7 +65,7 @@ public class Field : MonoBehaviour
             foreach (Cell cell in _allCells)
             {
                 float distance = Vector2.Distance(block.transform.position, cell.transform.position);
-                if (distance < _distanceToPlaceBlock && cell.IsEmpty)
+                if (distance < _distanceToPlaceBlock && cell.IsEmpty && !blocksByCell.ContainsKey(cell))
                 {
                     canPlace = true;
                     blocksByCell.Add(cell, block);
@@ -95,6 +97,4 @@ public class Field : MonoBehaviour
             block.Place(cell);
         }
     }
-
-    public Cell[,] GetCellMatrix() => _cellmatrix;
 }
