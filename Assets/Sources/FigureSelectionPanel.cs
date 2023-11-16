@@ -49,12 +49,13 @@ public class FigureSelectionPanel : MonoBehaviour
         for (int i = 0; i < _points.Length; i++)
         {
             Figure newFigure = Instantiate(_figurePrefabs[Random.Range(0, _figurePrefabs.Length)]);
-            newFigure.Init(_points[i].position);
 
             float angle = _rotateAngles[Random.Range(0, _rotateAngles.Length)];
 
-            newFigure.transform.position = _points[i].position;
-            newFigure.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+            Vector2 position = _points[i].position;
+            Quaternion rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+
+            newFigure.Init(_points[i].position, rotation);
 
             _spawnedFigures.Add(newFigure);
         }

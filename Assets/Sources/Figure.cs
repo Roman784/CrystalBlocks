@@ -5,6 +5,10 @@ using UnityEngine;
 public class Figure : MonoBehaviour
 {
     [SerializeField] private Block[] _blocks;
+    private Dictionary<Vector2Int, Block> _blocksByCoordinates; // Ѕлоки по координатам относительно основного блока.
+    public Block OriginBlock => _blocks[0]; // ќсновной блок фигуры, относительно которого всЄ расчитываетс€.
+
+    [Space]
 
     private bool _isMousePressed;
     private Vector2 _startMousePosition;
@@ -21,15 +25,33 @@ public class Figure : MonoBehaviour
         _camera = Camera.main;
     }
 
-    public void Init(Vector2 initialPosition)
+    public void Init(Vector2 position, Quaternion rotation)
     {
-        _initialPosition = initialPosition;
+        transform.position = position;
+        transform.rotation = rotation;
+
+        _initialPosition = position;
+
+        InitBlocksCoordinates();
     }
 
     private void Update()
     {
         FollowMouse();
     } 
+
+    // «аполн€ет словарь блоков и их координат.
+    //  оординаты устанавливаютс€ относительно основного блока.
+    private void InitBlocksCoordinates()
+    {
+        foreach (Block block in _blocks)
+        {
+            Vector2 relativePosition = new Vector2(block.transform.position.x - OriginBlock.transform.position.x, block.transform.position.y - OriginBlock.transform.position.y);
+            Vector2Int coordinates = new Vector2Int((int)(relativePosition.x + relativePosition.y), (int)(relativePosition.y - relativePosition.x));
+
+            _blocksByCoordinates.Add(coordinates, block);
+        }
+    }
 
     public void OnMouseDown()
     {
@@ -73,4 +95,5 @@ public class Figure : MonoBehaviour
     }
 
     public Block[] GetBlocks() => _blocks;
+    public Dictionary<Vector2Int, Block> GetBlocksByCoordinates() => _blocksByCoordinates;
 }
