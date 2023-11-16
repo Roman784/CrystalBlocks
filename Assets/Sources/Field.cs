@@ -8,13 +8,7 @@ public class Field : MonoBehaviour
     public static Field Instance; 
 
     [SerializeField] private Cell[] _allCells;
-    private Cell[,] _cellmatrix;
-
-    [Space]
-
-    [SerializeField] private float _distanceToPlaceBlock; // Погрешность при размещении блоков.
-
-    public UnityEvent FigurePlaced = new UnityEvent();
+    private Cell[,] _cellMatrix;
 
     private void Awake()
     {
@@ -31,70 +25,35 @@ public class Field : MonoBehaviour
         // Находит минимальные и максимальные координаты позиций клеток.
         foreach (Cell cell in _allCells)
         {
-            if (cell.Coordinates.x < minCellPosition.x) minCellPosition.x = cell.Coordinates.x;
-            if (cell.Coordinates.y < minCellPosition.y) minCellPosition.y = cell.Coordinates.y;
-            if (cell.Coordinates.x > maxCellPosition.x) maxCellPosition.x = cell.Coordinates.x;
-            if (cell.Coordinates.y > maxCellPosition.y) maxCellPosition.y = cell.Coordinates.y;
+            if (cell.Coordinate.x < minCellPosition.x) minCellPosition.x = cell.Coordinate.x;
+            if (cell.Coordinate.y < minCellPosition.y) minCellPosition.y = cell.Coordinate.y;
+            if (cell.Coordinate.x > maxCellPosition.x) maxCellPosition.x = cell.Coordinate.x;
+            if (cell.Coordinate.y > maxCellPosition.y) maxCellPosition.y = cell.Coordinate.y;
         }
 
         Vector2Int fieldSize = maxCellPosition - minCellPosition + Vector2Int.one;
 
-        _cellmatrix = new Cell[fieldSize.x, fieldSize.y];
+        _cellMatrix = new Cell[fieldSize.x, fieldSize.y];
 
         // Заполняет матрицу клеток.
         foreach (Cell cell in _allCells)
         {
-            int x = cell.Coordinates.x;
-            int y = cell.Coordinates.y;
+            int x = cell.Coordinate.x;
+            int y = cell.Coordinate.y;
 
-            _cellmatrix[x, y] = cell;
+            _cellMatrix[x, y] = cell;
         }
     }
 
-    public Cell[,] GetCellMatrix() => _cellmatrix;
+    public Cell[] GetAllCells() => _allCells;
+    public Cell[,] GetCellMatrix() => _cellMatrix;
 
-    // Размещает фигуру на поле и возвращает true или false в зависимости от результата.
-    // true - все блоки размещены, false - хотя бы 1 блок не размещён.
-    public bool TryToPlaceFigure(Figure figure)
+    // Существует ли ячейка, проверяет, не выходят ли координаты за пределы поля.
+    public bool IsValidCell(Vector2Int coordinate)
     {
-        Dictionary<Cell, Block> blocksByCell = new Dictionary<Cell, Block>(); // Клетка и блок, который будет на ней размещён.
-
-        foreach (Block block in figure.GetBlocks())
-        {
-            bool canPlace = false; // Нашлась ли клетка для размещения данного блока.
-            foreach (Cell cell in _allCells)
-            {
-                float distance = Vector2.Distance(block.transform.position, cell.transform.position);
-                if (distance < _distanceToPlaceBlock && cell.IsEmpty && !blocksByCell.ContainsKey(cell))
-                {
-                    canPlace = true;
-                    blocksByCell.Add(cell, block);
-
-                    continue;
-                }
-            }
-
-            if (!canPlace) // Если хотя бы 1 блок не смог разместиться, остальные также не размещаются.
-                return false;
-        }
-
-        PlaceBlocks(blocksByCell);
-        figure.Destroy();
-
-        FigurePlaced.Invoke();
+        if (coordinate.x < 0 || coordinate.x >= _cellMatrix.GetLength(0)) return false;
+        if (coordinate.y < 0 || coordinate.y >= _cellMatrix.GetLength(1)) return false;
 
         return true;
-    }
-
-    // Размещает блоки на клетки согласно переданному словарю.
-    private void PlaceBlocks(Dictionary<Cell, Block> blocksByCell)
-    {
-        foreach (var item in blocksByCell)
-        {
-            Cell cell = item.Key;
-            Block block = item.Value;
-
-            block.Place(cell);
-        }
     }
 }

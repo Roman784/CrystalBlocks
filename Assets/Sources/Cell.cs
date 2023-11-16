@@ -8,12 +8,12 @@ public class Cell : MonoBehaviour
     public bool IsEmpty => OwnedBlock == null;
 
     // Координаты клетки, представленные для использования в квадратной матрице.
-    public Vector2Int Coordinates
+    public Vector2Int Coordinate
     {
         get
         {
             Vector2 position = transform.localPosition;
-            return new Vector2Int((int)(position.x + position.y), (int)(position.y - position.x));
+            return new Vector2Int(Mathf.RoundToInt(position.x + position.y), Mathf.RoundToInt(position.y - position.x));
         }
     }
 }

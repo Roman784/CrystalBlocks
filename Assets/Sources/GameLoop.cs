@@ -11,7 +11,7 @@ public class GameLoop : MonoBehaviour
 
     private void Start()
     {
-        Field.Instance.FigurePlaced.AddListener(StartLoop);
+       Figure.Placed.AddListener(StartLoop);
     }
 
     private void StartLoop()
