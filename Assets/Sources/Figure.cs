@@ -34,9 +34,9 @@ public class Figure : MonoBehaviour
     {
         transform.position = position;
         transform.rotation = rotation;
-
         _initialPosition = position;
 
+        RotateBlocks();
         InitBlocksCoordinates();
     }
 
@@ -55,6 +55,16 @@ public class Figure : MonoBehaviour
             Vector2Int coordinate = new Vector2Int(Mathf.RoundToInt(relativePosition.x + relativePosition.y), Mathf.RoundToInt(relativePosition.y - relativePosition.x));
 
             _blocksByCoordinates.Add(coordinate, block);
+        }
+    }
+
+    // Поворачивает блоки в зависимости от поворота фигуры (чтобы блики были направлены в одну сторону).
+    private void RotateBlocks()
+    {
+        float angle = -transform.rotation.eulerAngles.z;
+        foreach(Block block in _blocks)
+        {
+            block.transform.localRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
         }
     }
 
