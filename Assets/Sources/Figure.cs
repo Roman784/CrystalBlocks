@@ -72,5 +72,5 @@ public class Figure : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public IEnumerable GetBlocks() => _blocks;
+    public Block[] GetBlocks() => _blocks;
 }

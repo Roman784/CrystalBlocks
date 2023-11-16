@@ -22,8 +22,7 @@ public class FigureSelectionPanel : MonoBehaviour
 
     public void RemoveFigure(Figure figure)
     {
-        int index = _spawnedFigures.IndexOf(figure);
-        _spawnedFigures[index] = null;
+        _spawnedFigures.Remove(figure);
     }
 
     // Проверяет количество фигур на панели, если их не осталось - создаёт новые.
@@ -60,4 +59,6 @@ public class FigureSelectionPanel : MonoBehaviour
             _spawnedFigures.Add(newFigure);
         }
     }
+
+    public List<Figure> GetFigures() => _spawnedFigures;
 }
