@@ -61,7 +61,6 @@ public class Figure : MonoBehaviour
         if (placementResult)
         {
             Placed.Invoke(this);
-            Destroy();
         }
         else
         {
