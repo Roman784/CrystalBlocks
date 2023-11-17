@@ -51,8 +51,6 @@ public class FigureSelectionPanel : MonoBehaviour
             Figure newFigure = Instantiate(_figurePrefabs[Random.Range(0, _figurePrefabs.Length)]);
 
             float angle = _rotateAngles[Random.Range(0, _rotateAngles.Length)];
-
-            Vector2 position = _points[i].position;
             Quaternion rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
 
             newFigure.Init(_points[i].position, rotation);

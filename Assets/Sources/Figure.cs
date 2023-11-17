@@ -3,47 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(FigureMovement), typeof(FigurePlacement))]
 public class Figure : MonoBehaviour
 {
+    public static UnityEvent<Figure> Placed = new UnityEvent<Figure>();
+
     [SerializeField] private Block[] _blocks;
     private Dictionary<Vector2Int, Block> _blocksByCoordinates = new Dictionary<Vector2Int, Block>(); // Ѕлоки по координатам относительно основного блока.
     public Block OriginBlock => _blocks[0]; // ќсновной блок фигуры, относительно которого всЄ расчитываетс€.
 
-    [SerializeField] private float _distanceToPlaceBlock; // ѕогрешность при размещении блоков.
+    private FigurePlacement _placement;
+    private FigureMovement _movement;
 
-    public static UnityEvent Placed = new UnityEvent();
-
-    [Space]
-
-    private bool _isMousePressed;
-    private Vector2 _startMousePosition;
-
-    [Space]
-
-    [SerializeField] private float _revertSpeed;
-    private Vector2 _initialPosition;
-
-    private Camera _camera;
-
-    private void Start()
+    private void Awake()
     {
-        _camera = Camera.main;
+        _placement = GetComponent<FigurePlacement>();
+        _movement = GetComponent<FigureMovement>();
     }
 
     public void Init(Vector2 position, Quaternion rotation)
     {
         transform.position = position;
         transform.rotation = rotation;
-        _initialPosition = position;
+        _movement.SetInitialPosition(position);
 
         RotateBlocks();
         InitBlocksCoordinates();
     }
-
-    private void Update()
-    {
-        FollowMouse();
-    } 
 
     // «аполн€ет словарь блоков и их координат.
     //  оординаты устанавливаютс€ относительно основного блока.
@@ -68,115 +54,19 @@ public class Figure : MonoBehaviour
         }
     }
 
-    public void OnMouseDown()
+    public void MouseUp()
     {
-        _isMousePressed = true;
-        _startMousePosition = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-    }
+        bool placementResult = _placement.TryToPlace();
 
-    public void OnMouseUp()
-    {
-        _isMousePressed = false;
-
-        bool placementResult = TryToPlaceFigure();
-
-        if (!placementResult)
+        if (placementResult)
         {
-            StartCoroutine(RevertToInitialPosition());
+            Placed.Invoke(this);
+            Destroy();
         }
-    }
-
-    public void FollowMouse()
-    {
-        if (!_isMousePressed) return;
-
-        Vector2 position = (Vector2)(_camera.ScreenToWorldPoint(Input.mousePosition)) - _startMousePosition;
-        transform.position = position;
-    }
-
-    private IEnumerator RevertToInitialPosition()
-    {
-        while ((Vector2)transform.position != _initialPosition)
+        else
         {
-            transform.position = Vector2.MoveTowards(transform.position, _initialPosition, _revertSpeed * Time.deltaTime);
-            yield return null;
+            StartCoroutine(_movement.RevertToInitialPosition());
         }
-    }
-
-    // –азмещает фигуру на поле и возвращает true или false в зависимости от результата.
-    // true - фигура размещена, false - нет.
-    public bool TryToPlaceFigure()
-    {
-        Cell originCell = GetNearestCell(); // ќсновной блок размещаетс€ на ближайшей клетке.
-        Dictionary<Cell, Block> blocksByCell = GetBlocksByCell(originCell); //  летки и блоки, которые будут на них размещены.
-
-        // ¬ случае, если не дл€ всех блоков нашлась клетка.
-        if (blocksByCell.Count != _blocks.Length)
-            return false;
-
-        PlaceBlocks(blocksByCell);
-        Destroy();
-
-        Placed.Invoke();
-
-        return true;
-    }
-
-    // –азмещает блоки на клетки согласно переданному словарю.
-    private void PlaceBlocks(Dictionary<Cell, Block> blocksByCell)
-    {
-        foreach (var item in blocksByCell)
-        {
-            Cell cell = item.Key;
-            Block block = item.Value;
-
-            block.Place(cell);
-        }
-    }
-
-    // ¬озвращает ближайшую к основному блоку клетку.
-    private Cell GetNearestCell()
-    {
-        Cell[] cells = Field.Instance.GetAllCells();
-
-        float minDistance = _distanceToPlaceBlock;
-        Cell nearestCell = null;
-        
-        foreach (Cell cell in cells)
-        {
-            float distance = Vector2.Distance(OriginBlock.transform.position, cell.transform.position);
-            if (distance < _distanceToPlaceBlock && distance < minDistance)
-            {
-                minDistance = distance;
-                nearestCell = cell;
-            }
-        }
-
-        return nearestCell;
-    }
-
-    // ¬озвращает словарь клеток и блоков, которые могут на них разместитьс€.
-    private Dictionary<Cell, Block> GetBlocksByCell(Cell originCell)
-    {
-        Dictionary<Cell, Block> blocksByCell = new Dictionary<Cell, Block>();
-        Cell[,] cellMatrix = Field.Instance.GetCellMatrix();
-
-        if (originCell != null)
-        {
-            foreach (var item in _blocksByCoordinates)
-            {
-                Vector2Int blockCoordinate = item.Key;
-                Block block = item.Value;
-
-                Vector2Int cellCoordinate = originCell.Coordinate + blockCoordinate;
-                Cell cell = cellMatrix[cellCoordinate.x, cellCoordinate.y];
-
-                if (Field.Instance.IsValidCell(cellCoordinate) && cell.IsEmpty)
-                    blocksByCell.Add(cell, block);
-            }
-        }
-
-        return blocksByCell;
     }
 
     public void Destroy()

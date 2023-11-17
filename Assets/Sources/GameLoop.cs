@@ -14,7 +14,7 @@ public class GameLoop : MonoBehaviour
        Figure.Placed.AddListener(StartLoop);
     }
 
-    private void StartLoop()
+    private void StartLoop(Figure _)
     {
         HashSet<Block> blocksOnFilledLines = _lineChecker.GetBlocksOnFilledLines();
         _blocksDestroyer.Destroy(blocksOnFilledLines);
