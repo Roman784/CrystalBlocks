@@ -20,6 +20,6 @@ public class GameLoop : MonoBehaviour
         HashSet<Block> blocksOnFilledLines = _lineChecker.GetBlocksOnFilledLines();
         _blocksDestroyer.Destroy(blocksOnFilledLines);
         _figureSelectionPanel.CheckAvailability();
-        Debug.Log(_figurePlacementChecker.IsTherePlace());
+        Debug.Log(_figurePlacementChecker.HasPlace());
     }
 }
