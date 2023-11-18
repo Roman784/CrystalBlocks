@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7257818731456081942}
   - component: {fileID: 8040048853695376045}
   - component: {fileID: 3756759138033398586}
+  - component: {fileID: 3198429286279235736}
   - component: {fileID: 5174484951703048307}
   m_Layer: 0
   m_Name: Figure
@@ -74,6 +75,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _distanceToPlaceBlock: 0.5
+--- !u!114 &3198429286279235736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7265054947435541109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea8c0f5d8d5b3394b9d85524cea3d215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reducedScale: {x: 0.8, y: 0.8, z: 1}
 --- !u!60 &5174484951703048307
 PolygonCollider2D:
   m_ObjectHideFlags: 0

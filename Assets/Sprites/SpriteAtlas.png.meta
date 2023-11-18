@@ -139,12 +139,12 @@ TextureImporter:
       name: Block
       rect:
         serializedVersion: 2
-        x: 59
-        y: 42
-        width: 142
-        height: 142
+        x: 62
+        y: 46
+        width: 135
+        height: 135
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -161,11 +161,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 237
-        y: 52
-        width: 122
-        height: 122
+        y: 53
+        width: 121
+        height: 121
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,6 +190,7 @@ TextureImporter:
     nameFileIdTable:
       Block: -973087183
       Cell: 1990537050
+      SpriteAtlas_0: -1754352078
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

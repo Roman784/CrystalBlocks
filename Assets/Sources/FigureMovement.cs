@@ -38,18 +38,14 @@ public class FigureMovement : MonoBehaviour
         _isMousePressed = true;
         _startMousePosition = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
-        foreach (Block block in _figure.GetBlocks())
-            block.SetActiveShadow(true);
+        _figure.TakeUp();
     }
 
     public void OnMouseUp()
     {
         _isMousePressed = false;
 
-        foreach (Block block in _figure.GetBlocks())
-            block.SetActiveShadow(false);
-
-        _figure.MouseUp();
+        _figure.PutDown();
     }
 
     public void FollowMouse()
