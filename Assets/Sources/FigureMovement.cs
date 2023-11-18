@@ -50,7 +50,9 @@ public class FigureMovement : MonoBehaviour
     {
         if (!_isMousePressed) return;
 
-        Vector2 position = (Vector2)(_camera.ScreenToWorldPoint(Input.mousePosition)) - _startMousePosition;
+        Vector3 position = _camera.ScreenToWorldPoint(Input.mousePosition) - (Vector3)_startMousePosition;
+        position.z = -1f; // Что бы во время перемещения данная фигура была выше остальных.
+
         transform.position = position;
     }
 
