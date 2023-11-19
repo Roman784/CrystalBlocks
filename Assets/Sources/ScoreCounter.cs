@@ -16,6 +16,7 @@ public class ScoreCounter : MonoBehaviour
         UpdateDisplay();
 
         Repository.DataLoaded.AddListener(LoadData);
+        GameLoop.Defeated.AddListener(UpdateBestValue);
     }
 
     public void Increase(int destroyedBlocksCount)

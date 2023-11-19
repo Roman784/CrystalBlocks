@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameLoop : MonoBehaviour
 {
+    public static UnityEvent Defeated = new UnityEvent();
+
     [SerializeField] private LineChecker _lineChecker;
     [SerializeField] private BlocksDestroyer _blocksDestroyer;
     [SerializeField] private FigureSelectionPanel _figureSelectionPanel;
@@ -34,10 +37,6 @@ public class GameLoop : MonoBehaviour
         _figureSelectionPanel.CheckAvailability();
 
         bool isGameOver = !_figurePlacementChecker.HasPlace();
-        if (isGameOver)
-        {
-            Debug.Log("Game over");
-            _scoreCounter.UpdateBestValue();
-        }
+        if (isGameOver) Defeated.Invoke();
     }
 }
