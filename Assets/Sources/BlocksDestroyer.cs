@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class BlocksDestroyer : MonoBehaviour
 {
-    public void Destroy(HashSet<Block> blocks)
+    public void Destroy(HashSet<Cell> cells)
     {
-        foreach (Block block in blocks)
+        foreach (Cell cell in cells)
         {
-            block?.Destroy();
+            if (cell == null) continue;
+
+            StartCoroutine(cell.OwnedBlock.Destroy());
+            cell.OwnedBlock = null;
         }
     }
 }

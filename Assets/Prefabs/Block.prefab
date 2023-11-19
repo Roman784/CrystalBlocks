@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7129402658552614675}
   - component: {fileID: 6973035784234090298}
+  - component: {fileID: 2117981951440816080}
   m_Layer: 0
   m_Name: Block
   m_TagString: Untagged
@@ -131,6 +132,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Shadow: {fileID: 5531454198566921886}
+  _destroyClip: {fileID: 7400000, guid: ae2c060ecbfed764ca64dfc8982b9605, type: 2}
+  _destroyEffect: {fileID: 1335623203666107441, guid: 24f76539cadce83418bf47f9f37e8c97, type: 3}
+--- !u!95 &2117981951440816080
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2975372897680279325}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b48d1ea669001fd40b7ca3f76fd85a94, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5531454198566921886
 GameObject:
   m_ObjectHideFlags: 0

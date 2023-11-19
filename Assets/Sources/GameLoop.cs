@@ -17,8 +17,8 @@ public class GameLoop : MonoBehaviour
     private void StartLoop(Figure figure)
     {
         figure.Destroy();
-        HashSet<Block> blocksOnFilledLines = _lineChecker.GetBlocksOnFilledLines();
-        _blocksDestroyer.Destroy(blocksOnFilledLines);
+        HashSet<Cell> cellsOnFilledLines = _lineChecker.GetCellsOnFilledLines();
+        _blocksDestroyer.Destroy(cellsOnFilledLines);
         _figureSelectionPanel.CheckAvailability();
         Debug.Log(_figurePlacementChecker.HasPlace());
     }

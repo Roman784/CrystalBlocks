@@ -5,49 +5,49 @@ using UnityEngine;
 
 public class LineChecker : MonoBehaviour
 {
-    // Находит блоки на заполненных линиях и возвращает HashSet из них.
-    public HashSet<Block> GetBlocksOnFilledLines()
+    // Находит блоки на заполненных линиях и возвращает HashSet из клеток, где эти блоки находятся.
+    public HashSet<Cell> GetCellsOnFilledLines()
     {
-        HashSet<Block> blocksOnFilledLines = new HashSet<Block>();
+        HashSet<Cell> cellsOnFilledLines = new HashSet<Cell>();
         Cell[,] cellMatrix = Field.Instance.GetCellMatrix();
 
-        AddHorizontalBlocks(blocksOnFilledLines, cellMatrix);
-        AddVerticalBlocks(blocksOnFilledLines, cellMatrix);
+        AddHorizontalBlocks(cellsOnFilledLines, cellMatrix);
+        AddVerticalBlocks(cellsOnFilledLines, cellMatrix);
         
-        return blocksOnFilledLines;
+        return cellsOnFilledLines;
     }
 
-    private void AddHorizontalBlocks(HashSet<Block> blocksOnFilledLines, Cell[,] cellMatrix)
+    private void AddHorizontalBlocks(HashSet<Cell> cellsOnFilledLines, Cell[,] cellMatrix)
     {
-        AddBlocks(blocksOnFilledLines, cellMatrix, true);
+        AddBlocks(cellsOnFilledLines, cellMatrix, true);
     }
 
-    private void AddVerticalBlocks(HashSet<Block> blocksOnFilledLines, Cell[,] cellMatrix)
+    private void AddVerticalBlocks(HashSet<Cell> cellsOnFilledLines, Cell[,] cellMatrix)
     {
-        AddBlocks(blocksOnFilledLines, cellMatrix, false);
+        AddBlocks(cellsOnFilledLines, cellMatrix, false);
     }
 
-    private void AddBlocks(HashSet<Block> blocksOnFilledLines, Cell[,] cellMatrix, bool isHorizontal)
+    private void AddBlocks(HashSet<Cell> cellsOnFilledLines, Cell[,] cellMatrix, bool isHorizontal)
     {
         for (int i = 0; i < cellMatrix.GetLength(0); i++)
         {
-            List<Block> blocks = new List<Block>();
+            List<Cell> cells = new List<Cell>();
             for (int j = 0; j < cellMatrix.GetLength(1); j++)
             {
                 if (cellMatrix[i, j].IsEmpty && !isHorizontal || cellMatrix[j, i].IsEmpty && isHorizontal)
                 {
-                    blocks.Clear();
+                    cells.Clear();
                     break;
                 }
 
                 if (!isHorizontal)
-                    blocks.Add(cellMatrix[i, j].OwnedBlock);
+                    cells.Add(cellMatrix[i, j]);
 
                 if (isHorizontal)
-                    blocks.Add(cellMatrix[j, i].OwnedBlock);
+                    cells.Add(cellMatrix[j, i]);
             }
 
-            blocksOnFilledLines.UnionWith(blocks);
+            cellsOnFilledLines.UnionWith(cells);
         }
     }
 }
