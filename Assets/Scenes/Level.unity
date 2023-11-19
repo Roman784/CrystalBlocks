@@ -5592,14 +5592,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2089199658}
-    - target: {fileID: 1205383772367358347, guid: 8c97c984e303faf4e96ee52cf0d26e4f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 1205383772367358347, guid: 8c97c984e303faf4e96ee52cf0d26e4f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DefeatMenu, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 4584069321147233569, guid: 8c97c984e303faf4e96ee52cf0d26e4f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -5678,22 +5670,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4584069321147233569, guid: 8c97c984e303faf4e96ee52cf0d26e4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5492386659536822134, guid: 8c97c984e303faf4e96ee52cf0d26e4f, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5492386659536822134, guid: 8c97c984e303faf4e96ee52cf0d26e4f, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5492386659536822134, guid: 8c97c984e303faf4e96ee52cf0d26e4f, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5492386659536822134, guid: 8c97c984e303faf4e96ee52cf0d26e4f, type: 3}
-      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 197012122838322654, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_Pivot.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 197012122838322654, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 197012122838322654, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 197012122838322654, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_SizeDelta.x
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 197012122838322654, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -117.499985
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 979923118757181920, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_Sprite
@@ -38,7 +38,7 @@ PrefabInstance:
       objectReference: {fileID: 1704767507, guid: 56c953482e98a574c93e61c131dc8171, type: 3}
     - target: {fileID: 4831211244257954425, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_Name
-      value: PlayButton_long Variant
+      value: PlayButton_long
       objectReference: {fileID: 0}
     - target: {fileID: 6789580843473574691, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_TargetGraphic
@@ -46,15 +46,15 @@ PrefabInstance:
       objectReference: {fileID: 1917154259249604462}
     - target: {fileID: 6789580843473574691, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenMainMenu
+      value: RestartLevel
       objectReference: {fileID: 0}
     - target: {fileID: 6789580843473574691, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PauseMenu, Assembly-CSharp
+      value: DefeatMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8151215334495299465, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8151215334495299465, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_Pivot.y
@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8151215334495299465, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 315
       objectReference: {fileID: 0}
     - target: {fileID: 8151215334495299465, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_SizeDelta.y
@@ -114,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8151215334495299465, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 170
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 8151215334495299465, guid: ebc63616890a2db4cb9ae3a3d57fe261, type: 3}
       propertyPath: m_AnchoredPosition.y
