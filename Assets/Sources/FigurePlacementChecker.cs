@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class FigurePlacementChecker : MonoBehaviour
+public class FigurePlacementChecker
 {
     // Есть ли на поле место для размещения хотя бы одной имеющейся фигуры.
     public bool HasPlace()

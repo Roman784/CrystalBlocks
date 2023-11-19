@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlocksDestroyer : MonoBehaviour
+public class BlocksDestroyer
 {
     public void Destroy(HashSet<Cell> cells)
     {
@@ -10,7 +10,7 @@ public class BlocksDestroyer : MonoBehaviour
         {
             if (cell == null) continue;
 
-            StartCoroutine(cell.OwnedBlock.Destroy());
+            cell.OwnedBlock.StartDestroy();
             cell.OwnedBlock = null;
         }
     }

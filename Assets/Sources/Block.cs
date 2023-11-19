@@ -31,7 +31,12 @@ public class Block : MonoBehaviour
         _Shadow.SetActive(value);
     }
 
-    public IEnumerator Destroy()
+    public void StartDestroy()
+    {
+        StartCoroutine(Destroy());
+    }
+
+    private IEnumerator Destroy()
     {
         _animator.SetTrigger("Destroy");
 

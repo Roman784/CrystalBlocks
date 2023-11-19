@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class LineChecker : MonoBehaviour
+public class LineChecker
 {
     // Находит блоки на заполненных линиях и возвращает HashSet из клеток, где эти блоки находятся.
     public HashSet<Cell> GetCellsOnFilledLines()

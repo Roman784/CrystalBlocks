@@ -9,6 +9,13 @@ public class GameLoop : MonoBehaviour
     [SerializeField] private FigureSelectionPanel _figureSelectionPanel;
     [SerializeField] private FigurePlacementChecker _figurePlacementChecker;
 
+    private void Awake()
+    {
+        _lineChecker = new LineChecker();
+        _blocksDestroyer = new BlocksDestroyer();
+        _figurePlacementChecker = new FigurePlacementChecker();
+    }
+
     private void Start()
     {
        Figure.Placed.AddListener(StartLoop);
