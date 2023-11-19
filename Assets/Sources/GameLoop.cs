@@ -25,10 +25,19 @@ public class GameLoop : MonoBehaviour
     private void StartLoop(Figure figure)
     {
         figure.Destroy();
+
         HashSet<Cell> cellsOnFilledLines = _lineChecker.GetCellsOnFilledLines();
         _blocksDestroyer.Destroy(cellsOnFilledLines);
+
         _scoreCounter.Increase(cellsOnFilledLines.Count);
+
         _figureSelectionPanel.CheckAvailability();
-        Debug.Log(_figurePlacementChecker.HasPlace());
+
+        bool isGameOver = !_figurePlacementChecker.HasPlace();
+        if (isGameOver)
+        {
+            Debug.Log("Game over");
+            _scoreCounter.UpdateBestValue();
+        }
     }
 }

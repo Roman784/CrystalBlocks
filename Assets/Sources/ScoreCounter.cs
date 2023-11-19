@@ -14,27 +14,35 @@ public class ScoreCounter : MonoBehaviour
     private void Awake()
     {
         UpdateDisplay();
+
+        Repository.DataLoaded.AddListener(LoadData);
     }
 
     public void Increase(int destroyedBlocksCount)
     {
         _value += destroyedBlocksCount * 10;
-
         UpdateDisplay();
     }
 
-    private void UpdateBestValue()
+    public void UpdateBestValue()
     {
         if (_value <= _bestValue) return;
 
         _bestValue = _value;
-
         UpdateDisplay();
+
+        Repository.Instance.SetBestScore(_bestValue);
     }
 
     private void UpdateDisplay()
     {
         _valueRenderer.text = _value.ToString();
         _bestValueRenderer.text = _bestValue.ToString();
+    }
+
+    private void LoadData()
+    {
+        _bestValue = Repository.Instance.GameData.BestScore;
+        UpdateDisplay();
     }
 }
