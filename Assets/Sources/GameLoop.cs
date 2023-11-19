@@ -8,6 +8,7 @@ public class GameLoop : MonoBehaviour
     [SerializeField] private BlocksDestroyer _blocksDestroyer;
     [SerializeField] private FigureSelectionPanel _figureSelectionPanel;
     [SerializeField] private FigurePlacementChecker _figurePlacementChecker;
+    [SerializeField] private ScoreCounter _scoreCounter;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class GameLoop : MonoBehaviour
         figure.Destroy();
         HashSet<Cell> cellsOnFilledLines = _lineChecker.GetCellsOnFilledLines();
         _blocksDestroyer.Destroy(cellsOnFilledLines);
+        _scoreCounter.Increase(cellsOnFilledLines.Count);
         _figureSelectionPanel.CheckAvailability();
         Debug.Log(_figurePlacementChecker.HasPlace());
     }
