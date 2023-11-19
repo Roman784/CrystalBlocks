@@ -13,7 +13,7 @@ public class Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private void Awake()
     {
         _initialPosition = _sprite.localPosition;
-        _shiftedPosition = _initialPosition + _shadow.effectDistance;
+        _shiftedPosition = _initialPosition + _shadow.effectDistance / 2f;
     }
 
     public void OnPointerEnter(PointerEventData pointerEventData)
