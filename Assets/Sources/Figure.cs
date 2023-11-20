@@ -60,6 +60,8 @@ public class Figure : MonoBehaviour
         if (placementResult)
         {
             Placed.Invoke(this);
+
+            SoundPlayer.Instance?.PlayFigurePlacementSound();
         }
         else
         {

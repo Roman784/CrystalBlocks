@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenu : Menu
 {
@@ -11,9 +12,16 @@ public class MainMenu : Menu
 
     [SerializeField] private TMP_Text _bestScoreRenderer;
 
+    [Space]
+
+    [SerializeField] private Image _soundIcon;
+    [SerializeField] private Sprite _soundOnSprite;
+    [SerializeField] private Sprite _soundOffSprite;
+
     private void Awake()
     {
-        Repository.DataLoaded.AddListener(LoadData);
+        Repository.DataLoaded.AddListener(UpdateBestScoreRenderer);
+        SoundPlayer.VolumeChanged.AddListener(UpdateSoundIcon);
     }
 
     public void OpenLevel()
@@ -21,14 +29,19 @@ public class MainMenu : Menu
         OpenScene(_levelName);
     }
 
-    public void ChangeSound()
+    public void ChangeSoundVolume()
     {
-
+        SoundPlayer.Instance?.ChangeVolume();
     }
 
-    private void LoadData()
+    private void UpdateBestScoreRenderer()
     {
         int bestScore = Repository.Instance.GameData.BestScore;
         _bestScoreRenderer.text = bestScore.ToString();
+    }
+
+    private void UpdateSoundIcon(float volume)
+    {
+        _soundIcon.sprite = volume > 0 ? _soundOnSprite : _soundOffSprite;
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] private Transform _sprite;
     [SerializeField] private Shadow _shadow;
@@ -26,5 +26,10 @@ public class Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         _sprite.localPosition = _initialPosition;
         _shadow.enabled = true;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        SoundPlayer.Instance?.PlayButtonClickSound();
     }
 }

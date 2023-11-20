@@ -1533,6 +1533,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _panel: {fileID: 745550766}
   _mainMenuName: MainMenu
+  _soundIcon: {fileID: 3434886260147134228}
+  _soundOnSprite: {fileID: 2066549293, guid: 56c953482e98a574c93e61c131dc8171, type: 3}
+  _soundOffSprite: {fileID: -676734659, guid: 56c953482e98a574c93e61c131dc8171, type: 3}
 --- !u!1001 &640877181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5714,7 +5717,7 @@ PrefabInstance:
       objectReference: {fileID: 563598636}
     - target: {fileID: 6818511707267002744, guid: 6bbbaa156c367274da8b42e8147da189, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeSound
+      value: ChangeSoundVolume
       objectReference: {fileID: 0}
     - target: {fileID: 6818511707267002744, guid: 6bbbaa156c367274da8b42e8147da189, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -5810,6 +5813,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8180710248046710226, guid: 6bbbaa156c367274da8b42e8147da189, type: 3}
   m_PrefabInstance: {fileID: 3434886260147134226}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3434886260147134228 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 936807451972408251, guid: 6bbbaa156c367274da8b42e8147da189, type: 3}
+  m_PrefabInstance: {fileID: 3434886260147134226}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3434886260147134230 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6089222689597480861, guid: 6bbbaa156c367274da8b42e8147da189, type: 3}

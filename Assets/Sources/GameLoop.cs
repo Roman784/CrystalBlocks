@@ -37,6 +37,11 @@ public class GameLoop : MonoBehaviour
         _figureSelectionPanel.CheckAvailability();
 
         bool isGameOver = !_figurePlacementChecker.HasPlace();
-        if (isGameOver) Defeated.Invoke();
+        if (isGameOver)
+        {
+            Defeated.Invoke();
+
+            SoundPlayer.Instance?.PlayDefeatSound();
+        }
     }
 }

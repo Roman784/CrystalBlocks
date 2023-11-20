@@ -13,5 +13,8 @@ public class BlocksDestroyer
             cell.OwnedBlock.StartDestroy();
             cell.OwnedBlock = null;
         }
+
+        if (cells.Count > 0)
+            SoundPlayer.Instance?.PlayBlocksDestructionSound();
     }
 }

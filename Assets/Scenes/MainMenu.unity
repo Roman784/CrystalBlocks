@@ -473,6 +473,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelName: Level
   _bestScoreRenderer: {fileID: 139319995}
+  _soundIcon: {fileID: 1365111392}
+  _soundOnSprite: {fileID: 2066549293, guid: 56c953482e98a574c93e61c131dc8171, type: 3}
+  _soundOffSprite: {fileID: -676734659, guid: 56c953482e98a574c93e61c131dc8171, type: 3}
 --- !u!1 &611169953
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +944,7 @@ PrefabInstance:
       objectReference: {fileID: 504822721}
     - target: {fileID: 6818511707267002744, guid: 6bbbaa156c367274da8b42e8147da189, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeSound
+      value: ChangeSoundVolume
       objectReference: {fileID: 0}
     - target: {fileID: 6818511707267002744, guid: 6bbbaa156c367274da8b42e8147da189, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1040,6 +1043,17 @@ RectTransform:
 --- !u!114 &1365111391 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6089222689597480861, guid: 6bbbaa156c367274da8b42e8147da189, type: 3}
+  m_PrefabInstance: {fileID: 1365111389}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1365111392 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 936807451972408251, guid: 6bbbaa156c367274da8b42e8147da189, type: 3}
   m_PrefabInstance: {fileID: 1365111389}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class GameData
 {
     public int BestScore;
+    public float SoundVolume;
 }
 
 public class Repository : MonoBehaviour
@@ -27,6 +28,9 @@ public class Repository : MonoBehaviour
         Instance = Singleton.Get<Repository>();
 
         SetSavePath();
+
+        ScoreCounter.BestValueChanged.AddListener(SetBestScore);
+        SoundPlayer.VolumeChanged.AddListener(SetSoundVolume);
     }
 
     private void Start()
@@ -74,9 +78,19 @@ public class Repository : MonoBehaviour
         Save();
     }
 
-    public void SetBestScore(int value)
+    private void SetBestScore(int value)
     {
+        if (value == GameData.BestScore) return;
+
         GameData.BestScore = value;
+        Save();
+    }
+
+    private void SetSoundVolume(float value)
+    {
+        if (value == GameData.SoundVolume) return;
+
+        GameData.SoundVolume = value;
         Save();
     }
 
