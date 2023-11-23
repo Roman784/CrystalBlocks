@@ -223,10 +223,10 @@ TextureImporter:
       name: Play_long
       rect:
         serializedVersion: 2
-        x: 100
-        y: 96
-        width: 315
-        height: 160
+        x: 1342
+        y: 89
+        width: 596
+        height: 295
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

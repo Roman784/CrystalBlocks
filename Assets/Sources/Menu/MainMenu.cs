@@ -12,16 +12,9 @@ public class MainMenu : Menu
 
     [SerializeField] private TMP_Text _bestScoreRenderer;
 
-    [Space]
-
-    [SerializeField] private Image _soundIcon;
-    [SerializeField] private Sprite _soundOnSprite;
-    [SerializeField] private Sprite _soundOffSprite;
-
     private void Awake()
     {
         Repository.DataLoaded.AddListener(UpdateBestScoreRenderer);
-        SoundPlayer.VolumeChanged.AddListener(UpdateSoundIcon);
     }
 
     public void OpenLevel()
@@ -38,10 +31,5 @@ public class MainMenu : Menu
     {
         int bestScore = Repository.Instance.GameData.BestScore;
         _bestScoreRenderer.text = bestScore.ToString();
-    }
-
-    private void UpdateSoundIcon(float volume)
-    {
-        _soundIcon.sprite = volume > 0 ? _soundOnSprite : _soundOffSprite;
     }
 }
