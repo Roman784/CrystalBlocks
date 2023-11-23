@@ -1,12 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class DefeatMenu : PanelMenu
 {
-    [SerializeField] private string _mainMenuName;
-    [SerializeField] private string _levelName;
-
     private void Awake()
     {
         GameLoop.Defeated.AddListener(OpenPanel);
@@ -14,11 +7,11 @@ public class DefeatMenu : PanelMenu
 
     public void OpenMainMenu()
     {
-        OpenScene(_mainMenuName);
+        OpenScene(SceneNames.MainMenu);
     }
 
     public void RestartLevel()
     {
-        OpenScene(_levelName);
+        OpenScene(SceneNames.Level);
     }
 }
