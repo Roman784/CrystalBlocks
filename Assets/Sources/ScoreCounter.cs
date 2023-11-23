@@ -1,52 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class ScoreCounter : MonoBehaviour
 {
-    private int _value;
-    [SerializeField] private TMP_Text _valueRenderer;
+    private int _score;
+    [SerializeField] private TMP_Text _renderer;
 
-    private int _bestValue;
-    [SerializeField] private TMP_Text _bestValueRenderer;
-
-    public static UnityEvent<int> BestValueChanged = new UnityEvent<int>();
+    public static UnityEvent<int> BestScoreChanged = new UnityEvent<int>();
 
     private void Awake()
     {
-        UpdateDisplay();
+        GameLoop.Defeated.AddListener(ChangeBestScore);
 
-        Repository.DataLoaded.AddListener(LoadData);
-        GameLoop.Defeated.AddListener(UpdateBestValue);
-    }
-
-    private void LoadData()
-    {
-        _bestValue = Repository.Instance.GameData.BestScore;
-        UpdateDisplay();
+        UpdateRenderer();
     }
 
     public void Increase(int destroyedBlocksCount)
     {
-        _value += destroyedBlocksCount * 10;
-        UpdateDisplay();
+        _score += destroyedBlocksCount * 10;
+        UpdateRenderer();
     }
 
-    public void UpdateBestValue()
+    public void ChangeBestScore()
     {
-        if (_value <= _bestValue) return;
+        int bestValue = Repository.Instance.GameData.BestScore;
 
-        _bestValue = _value;
-        UpdateDisplay();
-
-        BestValueChanged.Invoke(_bestValue);
+        if (_score > bestValue)
+            BestScoreChanged.Invoke(_score);
     }
 
-    private void UpdateDisplay()
+    private void UpdateRenderer()
     {
-        _valueRenderer.text = _value.ToString();
-        _bestValueRenderer.text = _bestValue.ToString();
+        _renderer.text = _score.ToString();
     }
 }

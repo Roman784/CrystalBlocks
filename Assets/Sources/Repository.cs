@@ -29,7 +29,7 @@ public class Repository : MonoBehaviour
 
         SetSavePath();
 
-        ScoreCounter.BestValueChanged.AddListener(SetBestScore);
+        ScoreCounter.BestScoreChanged.AddListener(SetBestScore);
         SoundPlayer.VolumeChanged.AddListener(SetSoundVolume);
     }
 
