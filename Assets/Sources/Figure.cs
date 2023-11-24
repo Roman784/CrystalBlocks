@@ -72,7 +72,6 @@ public class Figure : MonoBehaviour
 
     public void Destroy()
     {
-        FigureSelectionPanel.Instance.RemoveFigure(this);
         Destroy(gameObject);
     }
 

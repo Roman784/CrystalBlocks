@@ -11,9 +11,13 @@ public class ScoreCounter : MonoBehaviour
 
     private void Awake()
     {
-        GameLoop.Defeated.AddListener(ChangeBestScore);
-
         UpdateRenderer();
+    }
+
+    private void Start()
+    {
+        LineCleaner.BlocksDestroyed.AddListener(Increase);
+        DefeatChecker.Defeated.AddListener(ChangeBestScore);
     }
 
     public void Increase(int destroyedBlocksCount)

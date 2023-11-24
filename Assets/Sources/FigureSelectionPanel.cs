@@ -20,9 +20,17 @@ public class FigureSelectionPanel : MonoBehaviour
         CheckAvailability();
     }
 
-    public void RemoveFigure(Figure figure)
+    private void Start()
+    {
+        Figure.Placed.AddListener(DestroyFigure);
+    }
+
+    public void DestroyFigure(Figure figure)
     {
         _spawnedFigures.Remove(figure);
+        figure.Destroy();
+
+        CheckAvailability();
     }
 
     // Проверяет количество фигур на панели, если их не осталось - создаёт новые.

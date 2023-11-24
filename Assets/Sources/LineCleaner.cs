@@ -1,10 +1,31 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class LineChecker
+public class LineCleaner : MonoBehaviour
 {
+    public static UnityEvent<int> BlocksDestroyed = new UnityEvent<int>();
+    private void Start()
+    {
+        Figure.Placed.AddListener(DestroyBlocks);
+    }
+
+    public void DestroyBlocks(Figure _)
+    {
+        HashSet<Cell> cells = GetCellsOnFilledLines();
+
+        foreach (Cell cell in cells)
+        {
+            cell.OwnedBlock?.StartDestroy();
+            cell.OwnedBlock = null;
+        }
+
+        BlocksDestroyed.Invoke(cells.Count);
+
+        if (cells.Count > 0)
+            SoundPlayer.Instance?.PlayBlocksDestructionSound();
+    }
+
     // Находит блоки на заполненных линиях и возвращает HashSet из клеток, где эти блоки находятся.
     public HashSet<Cell> GetCellsOnFilledLines()
     {
@@ -13,7 +34,7 @@ public class LineChecker
 
         AddHorizontalBlocks(cellsOnFilledLines, cellMatrix);
         AddVerticalBlocks(cellsOnFilledLines, cellMatrix);
-        
+
         return cellsOnFilledLines;
     }
 

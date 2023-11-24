@@ -1,12 +1,27 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class FigurePlacementChecker
+public class DefeatChecker : MonoBehaviour
 {
+    public static UnityEvent Defeated = new UnityEvent();
+
+    private void Start()
+    {
+        LineCleaner.BlocksDestroyed.AddListener(Check);
+    }
+
+    private void Check(int _)
+    {
+        if (!HasPlace())
+        {
+            Defeated.Invoke();
+            SoundPlayer.Instance?.PlayDefeatSound();
+        }
+    }
+
     // Есть ли на поле место для размещения хотя бы одной имеющейся фигуры.
-    public bool HasPlace()
+    private bool HasPlace()
     {
         Cell[] cells = Field.Instance.GetAllCells();
         List<Figure> figures = FigureSelectionPanel.Instance.GetFigures();
