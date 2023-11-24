@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4395fba638ea52a48ae5b4a3a812dbf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundPrefab: {fileID: 4547931369618663906, guid: cb4a0621ca68a3049a0cb4c92cab3618, type: 3}
+  _soundSourcerPrefab: {fileID: 4547931369618663906, guid: cb4a0621ca68a3049a0cb4c92cab3618, type: 3}
   _buttonClickSound: {fileID: 8300000, guid: 586918589e737b347a14b1a5ba6eb73e, type: 3}
   _blocksDestructionSound: {fileID: 8300000, guid: ff778bd8094d37147b470089ebc0b56a, type: 3}
   _figurePlacementSound: {fileID: 8300000, guid: 0e6eb025d8b53c74e8e85c84cdd86ae2, type: 3}

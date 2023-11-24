@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    public static UnityEvent OnClick = new UnityEvent();
+
     [SerializeField] private Transform _sprite;
     [SerializeField] private Shadow _shadow;
 
@@ -30,6 +33,6 @@ public class Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        SoundPlayer.Instance?.PlayButtonClickSound();
+        OnClick.Invoke();
     }
 }

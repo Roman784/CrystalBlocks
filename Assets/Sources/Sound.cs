@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class Sound : MonoBehaviour
+public class SoundSourcer : MonoBehaviour
 {
     private void Awake()
     {

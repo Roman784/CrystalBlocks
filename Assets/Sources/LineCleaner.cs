@@ -21,9 +21,6 @@ public class LineCleaner : MonoBehaviour
         }
 
         BlocksDestroyed.Invoke(cells.Count);
-
-        if (cells.Count > 0)
-            SoundPlayer.Instance?.PlayBlocksDestructionSound();
     }
 
     // Находит блоки на заполненных линиях и возвращает HashSet из клеток, где эти блоки находятся.

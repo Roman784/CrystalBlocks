@@ -14,10 +14,7 @@ public class DefeatChecker : MonoBehaviour
     private void Check(int _)
     {
         if (!HasPlace())
-        {
             Defeated.Invoke();
-            SoundPlayer.Instance?.PlayDefeatSound();
-        }
     }
 
     // Есть ли на поле место для размещения хотя бы одной имеющейся фигуры.

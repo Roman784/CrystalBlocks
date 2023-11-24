@@ -11,7 +11,7 @@ public class SoundPlayer : MonoBehaviour
 
     public float Volume { get; private set; }
 
-    [SerializeField] private Sound _soundPrefab;
+    [SerializeField] private SoundSourcer _soundSourcerPrefab;
     [SerializeField] private AudioClip _buttonClickSound;
     [SerializeField] private AudioClip _blocksDestructionSound;
     [SerializeField] private AudioClip _figurePlacementSound;
@@ -22,6 +22,14 @@ public class SoundPlayer : MonoBehaviour
         Instance = Singleton.Get<SoundPlayer>();
 
         Repository.DataLoaded.AddListener(LoadData);
+    }
+
+    private void Start()
+    {
+        Figure.Placed.AddListener(PlayFigurePlacementSound);
+        LineCleaner.BlocksDestroyed.AddListener(PlayBlocksDestructionSound);
+        DefeatChecker.Defeated.AddListener(PlayDefeatSound);
+        Button.OnClick.AddListener(PlayButtonClickSound);
     }
 
     private void LoadData()
@@ -36,29 +44,30 @@ public class SoundPlayer : MonoBehaviour
         VolumeChanged.Invoke(Volume);
     }
 
-    public void PlayButtonClickSound()
+    private void PlaySound(AudioClip clip)
+    {
+        SoundSourcer sound = Instantiate(_soundSourcerPrefab);
+        sound.Init(clip, Volume);
+    }
+
+    private void PlayButtonClickSound()
     {
         PlaySound(_buttonClickSound);
     }
 
-    public void PlayBlocksDestructionSound()
+    private void PlayBlocksDestructionSound(int blockCount)
     {
-        PlaySound(_blocksDestructionSound);
+        if (blockCount > 0)
+            PlaySound(_blocksDestructionSound);
     }
 
-    public void PlayFigurePlacementSound()
+    private void PlayFigurePlacementSound(Figure _)
     {
         PlaySound(_figurePlacementSound);
     }
 
-    public void PlayDefeatSound()
+    private void PlayDefeatSound()
     {
         PlaySound(_defeatSound);
-    }
-
-    private void PlaySound(AudioClip clip)
-    {
-        Sound sound = Instantiate(_soundPrefab);
-        sound.Init(clip, Volume);
     }
 }
