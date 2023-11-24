@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class LineCleaner : MonoBehaviour
 {
     public static UnityEvent<int> BlocksDestroyed = new UnityEvent<int>();
+
     private void Start()
     {
         Figure.Placed.AddListener(DestroyBlocks);
