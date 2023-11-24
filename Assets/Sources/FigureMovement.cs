@@ -7,6 +7,7 @@ public class FigureMovement : MonoBehaviour
 {
     private bool _isMousePressed;
     private Vector2 _startMousePosition;
+    [SerializeField] private Vector2 _movementOffset; // Смещение относительно точки, за которую потянули фигуру.
 
     [Space]
 
@@ -52,7 +53,7 @@ public class FigureMovement : MonoBehaviour
     {
         if (!_isMousePressed) return;
 
-        Vector3 position = _camera.ScreenToWorldPoint(Input.mousePosition) - (Vector3)_startMousePosition;
+        Vector3 position = _camera.ScreenToWorldPoint(Input.mousePosition) - (Vector3)_startMousePosition + (Vector3)_movementOffset;
         position.z = -1f; // Что бы во время перемещения данная фигура была выше остальных.
 
         transform.position = position;

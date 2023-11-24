@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8040048853695376045}
   - component: {fileID: 3756759138033398586}
   - component: {fileID: 3198429286279235736}
-  - component: {fileID: 5174484951703048307}
+  - component: {fileID: 855912876055729430}
   m_Layer: 0
   m_Name: Figure
   m_TagString: Untagged
@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b501bcd261d3a94479ceb483bf4ec60f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movementOffset: {x: 0, y: 0.5}
   _revertSpeed: 60
 --- !u!114 &3756759138033398586
 MonoBehaviour:
@@ -87,9 +88,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8c0f5d8d5b3394b9d85524cea3d215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _reducedScale: {x: 0.8, y: 0.8, z: 1}
---- !u!60 &5174484951703048307
-PolygonCollider2D:
+  _reducedScale: {x: 0.8, y: 0.8}
+--- !u!58 &855912876055729430
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -121,19 +122,5 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.95105654, y: 0.30901697}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: 0.58778536, y: -0.80901694}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Radius: 1.25

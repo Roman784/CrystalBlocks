@@ -100,7 +100,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: FigureCube1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5174484951703048307, guid: 3773f3dddfe628245b105fba372b5a87, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4857934412477371550, guid: 3773f3dddfe628245b105fba372b5a87, type: 3}
