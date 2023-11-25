@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public static UnityEvent OnClick = new UnityEvent();
+    public static UnityEvent Clicked = new UnityEvent();
 
     [SerializeField] private Transform _sprite;
     [SerializeField] private Shadow _shadow;
@@ -33,6 +33,6 @@ public class Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        OnClick.Invoke();
+        Clicked.Invoke();
     }
 }

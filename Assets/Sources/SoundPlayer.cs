@@ -29,7 +29,7 @@ public class SoundPlayer : MonoBehaviour
         Figure.Placed.AddListener(PlayFigurePlacementSound);
         LineCleaner.BlocksDestroyed.AddListener(PlayBlocksDestructionSound);
         DefeatChecker.Defeated.AddListener(PlayDefeatSound);
-        Button.OnClick.AddListener(PlayButtonClickSound);
+        Button.Clicked.AddListener(PlayButtonClickSound);
     }
 
     private void LoadData()
