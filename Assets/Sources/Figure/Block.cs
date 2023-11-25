@@ -6,8 +6,8 @@ public class Block : MonoBehaviour
 {
     [SerializeField] private GameObject _Shadow;
 
-    [SerializeField] private AnimationClip _destroyClip;
-    [SerializeField] private GameObject _destroyEffect;
+    [SerializeField] private AnimationClip _destructionClip;
+    [SerializeField] private GameObject _destructionEffectPrefab;
 
     private Animator _animator;
 
@@ -31,19 +31,19 @@ public class Block : MonoBehaviour
         _Shadow.SetActive(value);
     }
 
-    public void StartDestroy()
+    public void StartDestruction()
     {
         StartCoroutine(Destroy());
     }
 
     private IEnumerator Destroy()
     {
-        _animator.SetTrigger("Destroy");
+        _animator.SetTrigger("Destruction");
 
-        GameObject effect = Instantiate(_destroyEffect);
+        GameObject effect = Instantiate(_destructionEffectPrefab);
         effect.transform.position = transform.position;
 
-        yield return new WaitForSeconds(_destroyClip.length);
+        yield return new WaitForSeconds(_destructionClip.length);
 
         Destroy(gameObject);
     }

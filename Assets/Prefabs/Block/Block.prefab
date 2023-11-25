@@ -132,8 +132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Shadow: {fileID: 5531454198566921886}
-  _destroyClip: {fileID: 7400000, guid: ae2c060ecbfed764ca64dfc8982b9605, type: 2}
-  _destroyEffect: {fileID: 1335623203666107441, guid: 24f76539cadce83418bf47f9f37e8c97, type: 3}
+  _destructionClip: {fileID: 7400000, guid: ae2c060ecbfed764ca64dfc8982b9605, type: 2}
+  _destructionEffectPrefab: {fileID: 1335623203666107441, guid: 24f76539cadce83418bf47f9f37e8c97, type: 3}
 --- !u!95 &2117981951440816080
 Animator:
   serializedVersion: 5

@@ -8,10 +8,10 @@ public class DefeatChecker : MonoBehaviour
 
     private void Start()
     {
-        FigureSelectionPanel.AvailabilityChecked.AddListener(Check);
+        LineCleaner.BlocksDestroyed.AddListener(Check);
     }
 
-    private void Check()
+    private void Check(int _)
     {
         if (!HasPlace())
             Defeated.Invoke();

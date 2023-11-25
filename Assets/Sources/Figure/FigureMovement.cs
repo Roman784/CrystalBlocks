@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Figure))]
@@ -14,15 +13,7 @@ public class FigureMovement : MonoBehaviour
     [SerializeField] private float _revertSpeed; // Скорость возвращения фигуры на начальную позицию, если размещение не удалось.
     private Vector2 _initialPosition;
 
-    private Figure _figure;
     private Camera _camera;
-
-    public void SetInitialPosition(Vector2 newPosition) => _initialPosition = newPosition;
-
-    private void Awake()
-    {
-        _figure = GetComponent<Figure>();
-    }
 
     private void Start()
     {
@@ -34,22 +25,23 @@ public class FigureMovement : MonoBehaviour
         FollowMouse();
     }
 
-    public void OnMouseDown()
+    public void SetInitialPosition(Vector2 newPosition)
+    {
+        _initialPosition = newPosition;
+    }
+
+    private void OnMouseDown()
     {
         _isMousePressed = true;
         _startMousePosition = _camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-
-        _figure.TakeUp();
     }
 
-    public void OnMouseUp()
+    private void OnMouseUp()
     {
         _isMousePressed = false;
-
-        _figure.PutDown();
     }
 
-    public void FollowMouse()
+    private void FollowMouse()
     {
         if (!_isMousePressed) return;
 

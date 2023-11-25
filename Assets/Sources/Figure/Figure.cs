@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -48,12 +47,12 @@ public class Figure : MonoBehaviour
         }
     }
 
-    public void TakeUp()
+    private void OnMouseDown()
     {
         _transformation.NormalizeScale();
     }
 
-    public void PutDown()
+    private void OnMouseUp()
     {
         bool placementResult = _placement.TryToPlace();
 

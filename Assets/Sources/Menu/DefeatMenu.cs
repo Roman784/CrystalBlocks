@@ -1,6 +1,6 @@
 public class DefeatMenu : PanelMenu
 {
-    private void Awake()
+    private void Start()
     {
         DefeatChecker.Defeated.AddListener(OpenPanel);
     }

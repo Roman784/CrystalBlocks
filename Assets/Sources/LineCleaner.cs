@@ -8,16 +8,16 @@ public class LineCleaner : MonoBehaviour
 
     private void Start()
     {
-        Figure.Placed.AddListener(DestroyBlocks);
+        FigureSelectionPanel.AvailabilityChecked.AddListener(DestroyBlocks);
     }
 
-    public void DestroyBlocks(Figure _)
+    private void DestroyBlocks()
     {
         HashSet<Cell> cells = GetCellsOnFilledLines();
 
         foreach (Cell cell in cells)
         {
-            cell.OwnedBlock?.StartDestroy();
+            cell.OwnedBlock?.StartDestruction();
             cell.OwnedBlock = null;
         }
 
@@ -25,7 +25,7 @@ public class LineCleaner : MonoBehaviour
     }
 
     // Находит блоки на заполненных линиях и возвращает HashSet из клеток, где эти блоки находятся.
-    public HashSet<Cell> GetCellsOnFilledLines()
+    private HashSet<Cell> GetCellsOnFilledLines()
     {
         HashSet<Cell> cellsOnFilledLines = new HashSet<Cell>();
         Cell[,] cellMatrix = Field.Instance.GetCellMatrix();

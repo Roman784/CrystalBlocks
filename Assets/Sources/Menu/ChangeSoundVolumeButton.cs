@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +8,7 @@ public class ChangeSoundVolumeButton : MonoBehaviour
     [SerializeField] private Sprite _soundOnSprite;
     [SerializeField] private Sprite _soundOffSprite;
 
-    private void Awake()
+    private void Start()
     {
         SoundPlayer.VolumeChanged.AddListener(UpdateIcon);
     }
