@@ -9,7 +9,7 @@ public class Field : MonoBehaviour
 
     [Space]
 
-    [SerializeField] private Vector2Int _fieldSize;
+    private int _fieldSize;
     [SerializeField] private Vector2 _cellsPositionOffset;
     [SerializeField] private float _distanceBetweenCells;
 
@@ -22,12 +22,13 @@ public class Field : MonoBehaviour
 
     private void InitField()
     {
-        _cellMatrix = new Cell[_fieldSize.x, _fieldSize.y];
+        _fieldSize = Mathf.FloorToInt(Mathf.Sqrt(_allCells.Length));
+        _cellMatrix = new Cell[_fieldSize, _fieldSize];
 
         int cellIndex = 0;
-        for (int x = 0; x < _fieldSize.x; x++)
+        for (int x = 0; x < _fieldSize; x++)
         {
-            for (int y = 0; y < _fieldSize.y; y++)
+            for (int y = 0; y < _fieldSize; y++)
             {
                 Vector2 position = new Vector2(x - y, x + y) * _distanceBetweenCells + _cellsPositionOffset;
                 _allCells[cellIndex].Init(new Vector2Int(x, y), position);
@@ -45,8 +46,8 @@ public class Field : MonoBehaviour
     // —уществует ли €чейка, провер€ет, не выход€т ли координаты за пределы пол€.
     public bool IsValidCell(Vector2Int coordinate)
     {
-        if (coordinate.x < 0 || coordinate.x >= _fieldSize.x) return false;
-        if (coordinate.y < 0 || coordinate.y >= _fieldSize.y) return false;
+        if (coordinate.x < 0 || coordinate.x >= _fieldSize) return false;
+        if (coordinate.y < 0 || coordinate.y >= _fieldSize) return false;
 
         return true;
     }

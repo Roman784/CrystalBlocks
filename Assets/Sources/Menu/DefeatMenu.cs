@@ -2,7 +2,7 @@ public class DefeatMenu : PanelMenu
 {
     private void Start()
     {
-        DefeatChecker.Defeated.AddListener(OpenPanel);
+        //DefeatChecker.Defeated.AddListener(OpenPanel);
     }
 
     public void OpenMainMenu()
