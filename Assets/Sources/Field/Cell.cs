@@ -6,12 +6,11 @@ public class Cell : MonoBehaviour
     public bool IsEmpty => OwnedBlock == null;
 
     // Координаты клетки, представленные для использования в квадратной матрице.
-    public Vector2Int Coordinate
+    public Vector2Int Coordinates { get; private set; }
+
+    public void Init(Vector2Int coordinates, Vector2 position)
     {
-        get
-        {
-            Vector2 position = transform.localPosition;
-            return new Vector2Int(Mathf.RoundToInt(position.x + position.y), Mathf.RoundToInt(position.y - position.x));
-        }
+        Coordinates = coordinates;
+        transform.position = position;
     }
 }

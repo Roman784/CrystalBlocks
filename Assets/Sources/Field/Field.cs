@@ -7,6 +7,12 @@ public class Field : MonoBehaviour
     [SerializeField] private Cell[] _allCells;
     private Cell[,] _cellMatrix;
 
+    [Space]
+
+    [SerializeField] private Vector2Int _fieldSize;
+    [SerializeField] private Vector2 _cellsPositionOffset;
+    [SerializeField] private float _distanceBetweenCells;
+
     private void Awake()
     {
         Instance = Singleton.Get<Field>();
@@ -16,29 +22,20 @@ public class Field : MonoBehaviour
 
     private void InitField()
     {
-        Vector2Int minCellPosition = Vector2Int.zero;
-        Vector2Int maxCellPosition = Vector2Int.zero;
+        _cellMatrix = new Cell[_fieldSize.x, _fieldSize.y];
 
-        // Ќаходит минимальные и максимальные координаты позиций клеток.
-        foreach (Cell cell in _allCells)
+        int cellIndex = 0;
+        for (int x = 0; x < _fieldSize.x; x++)
         {
-            if (cell.Coordinate.x < minCellPosition.x) minCellPosition.x = cell.Coordinate.x;
-            if (cell.Coordinate.y < minCellPosition.y) minCellPosition.y = cell.Coordinate.y;
-            if (cell.Coordinate.x > maxCellPosition.x) maxCellPosition.x = cell.Coordinate.x;
-            if (cell.Coordinate.y > maxCellPosition.y) maxCellPosition.y = cell.Coordinate.y;
-        }
+            for (int y = 0; y < _fieldSize.y; y++)
+            {
+                Vector2 position = new Vector2(x - y, x + y) * _distanceBetweenCells + _cellsPositionOffset;
+                _allCells[cellIndex].Init(new Vector2Int(x, y), position);
 
-        Vector2Int fieldSize = maxCellPosition - minCellPosition + Vector2Int.one;
+                _cellMatrix[x, y] = _allCells[cellIndex];
 
-        _cellMatrix = new Cell[fieldSize.x, fieldSize.y];
-
-        // «аполн€ет матрицу клеток.
-        foreach (Cell cell in _allCells)
-        {
-            int x = cell.Coordinate.x;
-            int y = cell.Coordinate.y;
-
-            _cellMatrix[x, y] = cell;
+                cellIndex++;
+            }
         }
     }
 
@@ -48,8 +45,8 @@ public class Field : MonoBehaviour
     // —уществует ли €чейка, провер€ет, не выход€т ли координаты за пределы пол€.
     public bool IsValidCell(Vector2Int coordinate)
     {
-        if (coordinate.x < 0 || coordinate.x >= _cellMatrix.GetLength(0)) return false;
-        if (coordinate.y < 0 || coordinate.y >= _cellMatrix.GetLength(1)) return false;
+        if (coordinate.x < 0 || coordinate.x >= _fieldSize.x) return false;
+        if (coordinate.y < 0 || coordinate.y >= _fieldSize.y) return false;
 
         return true;
     }

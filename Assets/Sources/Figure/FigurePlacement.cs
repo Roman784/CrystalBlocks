@@ -81,7 +81,7 @@ public class FigurePlacement : MonoBehaviour
                 Vector2Int blockCoordinate = item.Key;
                 Block block = item.Value;
 
-                Vector2Int cellCoordinate = originCell.Coordinate + blockCoordinate;
+                Vector2Int cellCoordinate = originCell.Coordinates + blockCoordinate;
 
                 if (!Field.Instance.IsValidCell(cellCoordinate)) break;
 
