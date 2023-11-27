@@ -23,6 +23,7 @@ public class AdOfferMenu : PanelMenu
         _hasBeenOffered = true;
 
         Debug.Log("Ad offer");
+        Yandex.Instance.ShowRewardedVideo();
 
         ClosePanel();
     }

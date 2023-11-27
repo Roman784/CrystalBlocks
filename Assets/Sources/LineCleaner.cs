@@ -4,7 +4,13 @@ using UnityEngine.Events;
 
 public class LineCleaner : MonoBehaviour
 {
+    public static LineCleaner Instance;
     public static UnityEvent<int> BlocksDestroyed = new UnityEvent<int>();
+
+    private void Awake()
+    {
+        Instance = Singleton.Get<LineCleaner>();
+    }
 
     private void Start()
     {
@@ -68,5 +74,28 @@ public class LineCleaner : MonoBehaviour
 
             cellsOnFilledLines.UnionWith(cells);
         }
+    }
+
+    // ¬ознаграждение за просмотр рекламы.
+    public void DestroyMiddleBlocks()
+    {
+        Cell[,] cellMatrix = Field.Instance.GetCellMatrix();
+        int _destroyedBlocksCount = 0;
+
+        for (int i = 1; i < cellMatrix.GetLength(0) - 1; i++)
+        {
+            for (int j = 1; j < cellMatrix.GetLength(1) - 1; j++)
+            {
+                if (!cellMatrix[i, j].IsEmpty)
+                {
+                    cellMatrix[i, j].OwnedBlock?.StartDestruction();
+                    cellMatrix[i, j].OwnedBlock = null;
+
+                    _destroyedBlocksCount += 1;
+                }
+            }
+        }
+
+        BlocksDestroyed.Invoke(_destroyedBlocksCount);
     }
 }
