@@ -31,7 +31,11 @@ public class ScoreCounter : MonoBehaviour
         int bestValue = Repository.Instance.GameData.BestScore;
 
         if (_score > bestValue)
+        {
             BestScoreChanged.Invoke(_score);
+
+            Repository.Instance?.SetBestScore(_score);
+        }
     }
 
     private void UpdateRenderer()

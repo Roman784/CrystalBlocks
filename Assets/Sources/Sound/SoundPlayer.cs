@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +7,7 @@ public class SoundPlayer : MonoBehaviour
 
     public static UnityEvent<float> VolumeChanged = new UnityEvent<float>();
 
-    public float Volume { get; private set; }
+    public float _volume;
 
     [SerializeField] private SoundSourcer _soundSourcerPrefab;
     [SerializeField] private AudioClip _buttonClickSound;
@@ -20,34 +18,38 @@ public class SoundPlayer : MonoBehaviour
     private void Awake()
     {
         Instance = Singleton.Get<SoundPlayer>();
-
-        Repository.DataLoaded.AddListener(LoadData);
     }
 
     private void Start()
     {
+        Repository.DataLoaded.AddListener(UpdateVolume);
+
         Figure.Placed.AddListener(PlayFigurePlacementSound);
         LineCleaner.BlocksDestroyed.AddListener(PlayBlocksDestructionSound);
         DefeatChecker.Defeated.AddListener(PlayDefeatSound);
         Button.Clicked.AddListener(PlayButtonClickSound);
+
+        UpdateVolume();
     }
 
-    private void LoadData()
+    private void UpdateVolume()
     {
-        Volume = Repository.Instance?.GameData.SoundVolume ?? 1f;
-        VolumeChanged.Invoke(Volume);
+        _volume = Repository.Instance.GameData.SoundVolume;
+        VolumeChanged.Invoke(_volume);
     }
 
     public void ChangeVolume()
     {
-        Volume = Volume > 0 ? 0f : 1f;
-        VolumeChanged.Invoke(Volume);
+        _volume = _volume > 0 ? 0f : 1f;
+        VolumeChanged.Invoke(_volume);
+
+        Repository.Instance?.SetSoundVolume(_volume);
     }
 
     private void PlaySound(AudioClip clip)
     {
         SoundSourcer sound = Instantiate(_soundSourcerPrefab);
-        sound.Init(clip, Volume);
+        sound.Init(clip, _volume);
     }
 
     private void PlayButtonClickSound()

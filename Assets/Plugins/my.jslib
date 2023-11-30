@@ -1,7 +1,20 @@
 mergeInto(LibraryManager.library, {
 
-    InitExtern: function(){
+    InitYSDKExtern: function(){
         initSDK();
+    },
+
+    SaveDataExtern: function(date){
+        var dateString = UTF8ToString(date);
+        var myobj = JSON.parse(dateString);
+        player.setData(myobj);
+    },
+
+    LoadDataExtern: function(){
+        player.getData().then(_date => {
+            const myJSON = JSON.stringify(_date);
+            myGameInstance.SendMessage('YandexReceiver', 'InvokeDataLoadedEvent', myJSON);
+        });
     },
 
     ShowRewardedVideoExtern : function () 
@@ -9,19 +22,19 @@ mergeInto(LibraryManager.library, {
         ysdk.adv.showRewardedVideo({
             callbacks: {
                 onOpen: () => {
-                    myGameInstance.SendMessage('Yandex', 'PauseGame');
+                    myGameInstance.SendMessage('YandexReceiver', 'StopGame');
                     console.log('Video ad open.');
                 },
                 onRewarded: () => {
-                    myGameInstance.SendMessage('Yandex', 'OnRewarded');
+                    myGameInstance.SendMessage('YandexReceiver', 'OnRewarded');
                     console.log('Rewarded!');
                 },
                 onClose: () => {
-                    myGameInstance.SendMessage('Yandex', 'ContinueGame');
+                    myGameInstance.SendMessage('YandexReceiver', 'ContinueGame');
                     console.log('Video ad closed.');
                 }, 
                 onError: (e) => {
-                    myGameInstance.SendMessage('Yandex', 'ContinueGame');
+                    myGameInstance.SendMessage('YandexReceiver', 'ContinueGame');
                     console.log('Error while open video ad:', e);
                 }
             }
