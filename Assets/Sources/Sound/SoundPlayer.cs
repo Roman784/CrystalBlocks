@@ -15,14 +15,9 @@ public class SoundPlayer : MonoBehaviour
     [SerializeField] private AudioClip _figurePlacementSound;
     [SerializeField] private AudioClip _defeatSound;
 
-    private void Awake()
-    {
-        Instance = Singleton.Get<SoundPlayer>();
-    }
-
     private void Start()
     {
-        Repository.DataLoaded.AddListener(UpdateVolume);
+        Instance = Singleton.Get<SoundPlayer>();
 
         Figure.Placed.AddListener(PlayFigurePlacementSound);
         LineCleaner.BlocksDestroyed.AddListener(PlayBlocksDestructionSound);

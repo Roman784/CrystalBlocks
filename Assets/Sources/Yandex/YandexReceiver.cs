@@ -6,8 +6,8 @@ public class YandexReceiver : MonoBehaviour
     public static UnityEvent SDKInited = new UnityEvent();
     public static UnityEvent<string> DataLoaded = new UnityEvent<string>();
 
-    public void InvokeYSDKInitedEvent() => SDKInited.Invoke();
-    public void InvokeDataLoadedEvent(string data) => DataLoaded.Invoke(data);
+    public void InvokeYSDKInitEvent() => SDKInited.Invoke();
+    public void InvokeDataLoadEvent(string data) => DataLoaded.Invoke(data);
 
     public void OnRewarded()
     {

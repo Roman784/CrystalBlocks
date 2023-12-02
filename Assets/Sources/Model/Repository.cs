@@ -13,8 +13,6 @@ public class Repository : MonoBehaviour
     {
         Instance = Singleton.Get<Repository>();
         DontDestroyOnLoad(gameObject);
-
-        YandexReceiver.DataLoaded.AddListener(Load);
     }
 
     private void Save()

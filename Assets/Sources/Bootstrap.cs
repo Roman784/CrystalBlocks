@@ -3,17 +3,30 @@ using UnityEngine.SceneManagement;
 
 public class Bootstrap : MonoBehaviour
 {
-    [SerializeField] private YandexSender _yandexSender;
+    private YandexSender _yandexSender;
 
     private void Start()
     {
-        YandexReceiver.SDKInited.AddListener(LoadData);
+        _yandexSender = YandexSender.Instance;
+
+        YandexReceiver.SDKInited.AddListener(_yandexSender.LoadData);
+        YandexReceiver.SDKInited.AddListener(InitLanguage);
+        YandexReceiver.DataLoaded.AddListener(InitRepository);
         Repository.DataLoaded.AddListener(OpenMainMenu);
 
         _yandexSender.InitYSDK();
     }
 
-    private void LoadData() => _yandexSender.LoadData();
+    private void InitRepository(string data)
+    {
+        Repository.Instance.Load(data);
+    }
+
+    private void InitLanguage()
+    {
+        string language = _yandexSender.GetLanguage();
+        Language.Instance.Init(language);
+    }
 
     private void OpenMainMenu()
     {

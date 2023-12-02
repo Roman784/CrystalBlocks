@@ -34,26 +34,20 @@ public class LineCleaner : MonoBehaviour
     private HashSet<Cell> GetCellsOnFilledLines()
     {
         HashSet<Cell> cellsOnFilledLines = new HashSet<Cell>();
-        Cell[,] cellMatrix = Field.Instance.GetCellMatrix();
 
-        AddHorizontalBlocks(cellsOnFilledLines, cellMatrix);
-        AddVerticalBlocks(cellsOnFilledLines, cellMatrix);
+        AddHorizontalBlocks(cellsOnFilledLines);
+        AddVerticalBlocks(cellsOnFilledLines);
 
         return cellsOnFilledLines;
     }
 
-    private void AddHorizontalBlocks(HashSet<Cell> cellsOnFilledLines, Cell[,] cellMatrix)
-    {
-        AddBlocks(cellsOnFilledLines, cellMatrix, true);
-    }
+    private void AddHorizontalBlocks(HashSet<Cell> cellsOnFilledLines) => AddBlocks(cellsOnFilledLines, true);
+    private void AddVerticalBlocks(HashSet<Cell> cellsOnFilledLines) => AddBlocks(cellsOnFilledLines, false);
 
-    private void AddVerticalBlocks(HashSet<Cell> cellsOnFilledLines, Cell[,] cellMatrix)
+    private void AddBlocks(HashSet<Cell> cellsOnFilledLines, bool isHorizontal)
     {
-        AddBlocks(cellsOnFilledLines, cellMatrix, false);
-    }
+        Cell[,] cellMatrix = Field.Instance.GetCellMatrix();
 
-    private void AddBlocks(HashSet<Cell> cellsOnFilledLines, Cell[,] cellMatrix, bool isHorizontal)
-    {
         for (int i = 0; i < cellMatrix.GetLength(0); i++)
         {
             List<Cell> cells = new List<Cell>();

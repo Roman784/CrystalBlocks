@@ -8,6 +8,7 @@ public class YandexSender : MonoBehaviour
     [DllImport("__Internal")] private static extern void InitYSDKExtern();
     [DllImport("__Internal")] private static extern void SaveDataExtern(string date);
     [DllImport("__Internal")] private static extern void LoadDataExtern();
+    [DllImport("__Internal")] private static extern string GetLanguageExtern();
     [DllImport("__Internal")] private static extern void ShowRewardedVideoExtern();
 
     private void Awake()
@@ -31,6 +32,12 @@ public class YandexSender : MonoBehaviour
     {
         try { LoadDataExtern(); }
         catch { Debug.Log("Load extern error"); }
+    }
+
+    public string GetLanguage()
+    {
+        try { return GetLanguageExtern(); }
+        catch { return "en"; }
     }
 
     public void ShowRewardedVideo()

@@ -727,6 +727,7 @@ GameObject:
   - component: {fileID: 124796617}
   - component: {fileID: 124796619}
   - component: {fileID: 124796618}
+  - component: {fileID: 124796620}
   m_Layer: 0
   m_Name: TitleText
   m_TagString: Untagged
@@ -750,8 +751,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: -25}
+  m_SizeDelta: {x: 700, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &124796618
 MonoBehaviour:
@@ -800,12 +801,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
+  m_fontSize: 80.05
   m_fontSizeBase: 100
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 100
   m_fontStyle: 32
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -850,6 +851,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124796616}
   m_CullTransparentMesh: 1
+--- !u!114 &124796620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124796616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bf6a0bd00851df498ea520d4c67f341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _en: add moves?
+  _ru: "\u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0445\u043E\u0434\u043E\u0432?"
 --- !u!1001 &134827749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2519,6 +2534,7 @@ GameObject:
   - component: {fileID: 827521691}
   - component: {fileID: 827521693}
   - component: {fileID: 827521692}
+  - component: {fileID: 827521694}
   m_Layer: 0
   m_Name: TitleText
   m_TagString: Untagged
@@ -2642,6 +2658,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827521690}
   m_CullTransparentMesh: 1
+--- !u!114 &827521694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827521690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bf6a0bd00851df498ea520d4c67f341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _en: pause
+  _ru: "\u043F\u0430\u0443\u0437\u0430"
 --- !u!1001 &834202941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3946,6 +3976,7 @@ GameObject:
   - component: {fileID: 1492806602}
   - component: {fileID: 1492806604}
   - component: {fileID: 1492806603}
+  - component: {fileID: 1492806605}
   m_Layer: 0
   m_Name: TitleText
   m_TagString: Untagged
@@ -3995,7 +4026,7 @@ MonoBehaviour:
   m_text: no moves left
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ec041b94aed25b74cb821cecade21a33, type: 2}
-  m_sharedMaterial: {fileID: -4277743591588801738, guid: 3cdbd61109b0e814c8a3e25ae731eab2, type: 2}
+  m_sharedMaterial: {fileID: 5226334144768339146, guid: ec041b94aed25b74cb821cecade21a33, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4058,7 +4089,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1492806604
@@ -4069,6 +4100,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492806601}
   m_CullTransparentMesh: 1
+--- !u!114 &1492806605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492806601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bf6a0bd00851df498ea520d4c67f341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _en: no moves left
+  _ru: "\u043D\u0435\u0442 \u0445\u043E\u0434\u043E\u0432"
 --- !u!1 &1682490466
 GameObject:
   m_ObjectHideFlags: 0

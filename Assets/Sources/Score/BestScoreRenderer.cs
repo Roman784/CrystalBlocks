@@ -15,7 +15,7 @@ public class BestScoreRenderer : MonoBehaviour
 
     private void UpdateRenderer()
     {
-        int value = Repository.Instance.GameData.BestScore;
+        int value = Repository.Instance?.GameData?.BestScore ?? 0;
         UpdateRenderer(value);
     }
 
