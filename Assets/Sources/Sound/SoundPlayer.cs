@@ -5,8 +5,6 @@ public class SoundPlayer : MonoBehaviour
 {
     public static SoundPlayer Instance;
 
-    public static UnityEvent<float> VolumeChanged = new UnityEvent<float>();
-
     public float _volume;
 
     [SerializeField] private SoundSourcer _soundSourcerPrefab;
@@ -19,24 +17,24 @@ public class SoundPlayer : MonoBehaviour
     {
         Instance = Singleton.Get<SoundPlayer>();
 
-        Figure.Placed.AddListener(PlayFigurePlacementSound);
-        LineCleaner.BlocksDestroyed.AddListener(PlayBlocksDestructionSound);
-        DefeatChecker.Defeated.AddListener(PlayDefeatSound);
-        Button.Clicked.AddListener(PlayButtonClickSound);
+        EventBus.Instance.FigurePlaced.AddListener(PlayFigurePlacementSound);
+        EventBus.Instance.BlocksDestroyed.AddListener(PlayBlocksDestructionSound);
+        EventBus.Instance.GameDefeated.AddListener(PlayDefeatSound);
+        EventBus.Instance.AnyButtonClicked.AddListener(PlayButtonClickSound);
 
         UpdateVolume();
     }
 
     private void UpdateVolume()
     {
-        _volume = Repository.Instance.GameData.SoundVolume;
-        VolumeChanged.Invoke(_volume);
+        _volume = Repository.Instance?.GameData?.SoundVolume ?? 1;
+        EventBus.Instance.VolumeChanged.Invoke(_volume);
     }
 
     public void ChangeVolume()
     {
         _volume = _volume > 0 ? 0f : 1f;
-        VolumeChanged.Invoke(_volume);
+        EventBus.Instance.VolumeChanged.Invoke(_volume);
 
         Repository.Instance?.SetSoundVolume(_volume);
     }

@@ -12,7 +12,7 @@ public class Bootstrap : MonoBehaviour
         YandexReceiver.SDKInited.AddListener(_yandexSender.LoadData);
         YandexReceiver.SDKInited.AddListener(InitLanguage);
         YandexReceiver.DataLoaded.AddListener(InitRepository);
-        Repository.DataLoaded.AddListener(OpenMainMenu);
+        EventBus.Instance.DataLoaded.AddListener(OpenMainMenu);
 
         _yandexSender.InitYSDK();
     }

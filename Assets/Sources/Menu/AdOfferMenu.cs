@@ -7,7 +7,7 @@ public class AdOfferMenu : PanelMenu
 
     private void Start()
     {
-        DefeatChecker.Defeated.AddListener(Offer);
+        EventBus.Instance.GameDefeated.AddListener(Offer);
     }
 
     private void Offer()

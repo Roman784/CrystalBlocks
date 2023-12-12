@@ -18,7 +18,7 @@ public class SimpleTextTranslator : MonoBehaviour
 
     private void UpdateText()
     {
-        Languages language = Language.Instance.CurrentLanguage;
+        Languages language = Language.Instance?.CurrentLanguage ?? Languages.En;
         _text.text = language == Languages.Ru ? _ru : _en;
     }
 }

@@ -1,10 +1,8 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Repository : MonoBehaviour
 {
     public static Repository Instance;
-    public static UnityEvent DataLoaded = new UnityEvent();
 
     public GameData GameData { get; private set; }
     [SerializeField] private GameData _defaultGameData;
@@ -47,7 +45,7 @@ public class Repository : MonoBehaviour
             DefaultData();
         }
 
-        DataLoaded.Invoke();
+        EventBus.Instance.DataLoaded.Invoke();
     }
 
     private void DefaultData()

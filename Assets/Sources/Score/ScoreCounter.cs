@@ -7,8 +7,6 @@ public class ScoreCounter : MonoBehaviour
     private int _score;
     [SerializeField] private TMP_Text _renderer;
 
-    public static UnityEvent<int> BestScoreChanged = new UnityEvent<int>();
-
     private void Awake()
     {
         UpdateRenderer();
@@ -16,8 +14,8 @@ public class ScoreCounter : MonoBehaviour
 
     private void Start()
     {
-        LineCleaner.BlocksDestroyed.AddListener(Increase);
-        DefeatChecker.Defeated.AddListener(ChangeBestScore);
+        EventBus.Instance.BlocksDestroyed.AddListener(Increase);
+        EventBus.Instance.GameDefeated.AddListener(ChangeBestScore);
     }
 
     public void Increase(int destroyedBlocksCount)
@@ -28,11 +26,11 @@ public class ScoreCounter : MonoBehaviour
 
     public void ChangeBestScore()
     {
-        int bestValue = Repository.Instance.GameData.BestScore;
+        int bestValue = Repository.Instance?.GameData?.BestScore ?? 0;
 
         if (_score > bestValue)
         {
-            BestScoreChanged.Invoke(_score);
+            EventBus.Instance.BestScoreChanged.Invoke(_score);
 
             Repository.Instance?.SetBestScore(_score);
         }

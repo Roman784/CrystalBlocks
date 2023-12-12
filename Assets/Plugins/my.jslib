@@ -27,6 +27,26 @@ mergeInto(LibraryManager.library, {
         return buffer;
     },
 
+    ShowFullscreenAdvExtern : function () 
+    {
+        ysdk.adv.showFullscreenAdv({
+            callbacks: {
+                onClose: function(wasShown) {
+                    myGameInstance.SendMessage('YandexReceiver', 'ContinueGame');
+                    console.log ("adv close");
+                },
+                onOpen: function(open) {
+                    myGameInstance.SendMessage('YandexReceiver', 'StopGame');
+                    console.log ("adv open");
+                },
+                onError: function(error) {
+                    myGameInstance.SendMessage('YandexReceiver', 'ContinueGame');
+                    console.log ("adv error");
+                }
+            }
+        })
+    },
+
     ShowRewardedVideoExtern : function () 
     {
         ysdk.adv.showRewardedVideo({

@@ -7,8 +7,8 @@ public class BestScoreRenderer : MonoBehaviour
 
     private void Start()
     {
-        Repository.DataLoaded.AddListener(UpdateRenderer);
-        ScoreCounter.BestScoreChanged.AddListener(UpdateRenderer);
+        EventBus.Instance.DataLoaded.AddListener(UpdateRenderer);
+        EventBus.Instance.BestScoreChanged.AddListener(UpdateRenderer);
 
         UpdateRenderer();
     }

@@ -1,13 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class FigureSelectionPanel : MonoBehaviour
 {
     public static FigureSelectionPanel Instance;
-
-    public static UnityEvent AvailabilityChecked = new UnityEvent();
 
     [SerializeField] private Figure[] _figurePrefabs;
     [SerializeField] private Transform[] _points; // “очки, на которых будут размещены фигуры.
@@ -21,11 +17,6 @@ public class FigureSelectionPanel : MonoBehaviour
         Instance = Singleton.Get<FigureSelectionPanel>();
 
         CheckAvailability();
-    }
-
-    private void Start()
-    {
-        Figure.Placed.AddListener(DestroyFigure);
     }
 
     public void DestroyFigure(Figure figure)
@@ -52,7 +43,7 @@ public class FigureSelectionPanel : MonoBehaviour
         if (!hasFigure)
             CreateFigures();
 
-        AvailabilityChecked.Invoke();
+        EventBus.Instance.FigureAvailabilityChecked.Invoke();
     }
 
     private void CreateFigures()

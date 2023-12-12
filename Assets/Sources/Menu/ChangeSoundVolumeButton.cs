@@ -10,14 +10,14 @@ public class ChangeSoundVolumeButton : MonoBehaviour
 
     private void Awake()
     {
-        SoundPlayer.VolumeChanged.AddListener(UpdateIcon);
+        EventBus.Instance.VolumeChanged.AddListener(UpdateIcon);
 
         UpdateIcon();
     }
 
     private void UpdateIcon()
     {
-        float volume = Repository.Instance.GameData.SoundVolume;
+        float volume = Repository.Instance?.GameData?.SoundVolume ?? 1;
         UpdateIcon(volume);
     }
 

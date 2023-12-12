@@ -1,23 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class LineCleaner : MonoBehaviour
 {
     public static LineCleaner Instance;
-    public static UnityEvent<int> BlocksDestroyed = new UnityEvent<int>();
 
     private void Awake()
     {
         Instance = Singleton.Get<LineCleaner>();
     }
 
-    private void Start()
-    {
-        FigureSelectionPanel.AvailabilityChecked.AddListener(DestroyBlocks);
-    }
-
-    private void DestroyBlocks()
+    public void DestroyBlocks()
     {
         HashSet<Cell> cells = GetCellsOnFilledLines();
 
@@ -27,7 +20,7 @@ public class LineCleaner : MonoBehaviour
             cell.OwnedBlock = null;
         }
 
-        BlocksDestroyed.Invoke(cells.Count);
+        EventBus.Instance.BlocksDestroyed.Invoke(cells.Count);
     }
 
     // Находит блоки на заполненных линиях и возвращает HashSet из клеток, где эти блоки находятся.
@@ -90,6 +83,6 @@ public class LineCleaner : MonoBehaviour
             }
         }
 
-        BlocksDestroyed.Invoke(_destroyedBlocksCount);
+        EventBus.Instance.BlocksDestroyed.Invoke(_destroyedBlocksCount);
     }
 }

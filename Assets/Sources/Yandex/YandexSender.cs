@@ -9,6 +9,7 @@ public class YandexSender : MonoBehaviour
     [DllImport("__Internal")] private static extern void SaveDataExtern(string date);
     [DllImport("__Internal")] private static extern void LoadDataExtern();
     [DllImport("__Internal")] private static extern string GetLanguageExtern();
+    [DllImport("__Internal")] private static extern void ShowFullscreenAdvExtern();
     [DllImport("__Internal")] private static extern void ShowRewardedVideoExtern();
 
     private void Awake()
@@ -38,6 +39,12 @@ public class YandexSender : MonoBehaviour
     {
         try { return GetLanguageExtern(); }
         catch { return "en"; }
+    }
+
+    public void ShowFullscreenAdv()
+    {
+        try { ShowFullscreenAdvExtern(); }
+        catch { Debug.Log("Full screen adv error"); }
     }
 
     public void ShowRewardedVideo()

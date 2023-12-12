@@ -1,20 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class DefeatChecker : MonoBehaviour
 {
-    public static UnityEvent Defeated = new UnityEvent();
-
-    private void Start()
-    {
-        LineCleaner.BlocksDestroyed.AddListener(Check);
-    }
-
-    private void Check(int _)
+    public void Check()
     {
         if (!HasPlace())
-            Defeated.Invoke();
+            EventBus.Instance.GameDefeated.Invoke();
     }
 
     // Есть ли на поле место для размещения хотя бы одной имеющейся фигуры.

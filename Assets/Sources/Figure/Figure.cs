@@ -5,8 +5,6 @@ using UnityEngine.Events;
 [RequireComponent(typeof(FigureMovement), typeof(FigurePlacement), typeof(FigureTransformation))]
 public class Figure : MonoBehaviour
 {
-    public static UnityEvent<Figure> Placed = new UnityEvent<Figure>();
-
     [SerializeField] private Block[] _blocks;
     private Dictionary<Vector2Int, Block> _blocksByCoordinates = new Dictionary<Vector2Int, Block>(); // Блоки по координатам относительно основного блока.
     public Block OriginBlock => _blocks[0]; // Основной блок фигуры, относительно которого всё расчитывается.
@@ -58,7 +56,7 @@ public class Figure : MonoBehaviour
 
         if (placementResult)
         {
-            Placed.Invoke(this);
+            EventBus.Instance.FigurePlaced.Invoke(this);
         }
         else
         {
