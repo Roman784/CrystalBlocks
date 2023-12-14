@@ -37,15 +37,17 @@ public class LineCleaner : MonoBehaviour
     private void AddHorizontalBlocks(HashSet<Cell> cellsOnFilledLines) => AddBlocks(cellsOnFilledLines, true);
     private void AddVerticalBlocks(HashSet<Cell> cellsOnFilledLines) => AddBlocks(cellsOnFilledLines, false);
 
+    // Добавляет блоки в переданный хешсет.
     private void AddBlocks(HashSet<Cell> cellsOnFilledLines, bool isHorizontal)
     {
         Cell[,] cellMatrix = Field.Instance.GetCellMatrix();
 
         for (int i = 0; i < cellMatrix.GetLength(0); i++)
         {
-            List<Cell> cells = new List<Cell>();
+            List<Cell> cells = new List<Cell>(); // Список блоков на текущей линии.
             for (int j = 0; j < cellMatrix.GetLength(1); j++)
             {
+                // Если на линии попалась пустая клетка.
                 if (cellMatrix[i, j].IsEmpty && !isHorizontal || cellMatrix[j, i].IsEmpty && isHorizontal)
                 {
                     cells.Clear();

@@ -1,16 +1,19 @@
 mergeInto(LibraryManager.library, {
 
-    InitYSDKExtern: function(){
+    InitYSDKExtern: function()
+    {
         initSDK();
     },
 
-    SaveDataExtern: function(date){
+    SaveDataExtern: function(date)
+    {
         var dateString = UTF8ToString(date);
         var myobj = JSON.parse(dateString);
         player.setData(myobj);
     },
 
-    LoadDataExtern: function(){
+    LoadDataExtern: function()
+    {
         player.getData().then(_date => {
             const myJSON = JSON.stringify(_date);
             myGameInstance.SendMessage('YandexReceiver', 'InvokeDataLoadEvent', myJSON);

@@ -19,6 +19,7 @@ public class FigureSelectionPanel : MonoBehaviour
         CheckAvailability();
     }
 
+    // Уничтожает переданную фигуру и проверяет необходимость создания новых.
     public void DestroyFigure(Figure figure)
     {
         _spawnedFigures.Remove(figure);
@@ -46,18 +47,21 @@ public class FigureSelectionPanel : MonoBehaviour
         EventBus.Instance.FigureAvailabilityChecked.Invoke();
     }
 
+    // Создаёт новые фигуры фигуры на каждой точке.
     private void CreateFigures()
     {
         _spawnedFigures.Clear();
 
-        for (int i = 0; i < _points.Length; i++)
+        // Проходит по всем точкам и создаёт на них фигуры.
+        foreach(Transform point in _points)
         {
             Figure newFigure = Instantiate(_figurePrefabs[Random.Range(0, _figurePrefabs.Length)]);
 
+            // Определение поворота фигуры.
             float angle = _rotateAngles[Random.Range(0, _rotateAngles.Length)];
             Quaternion rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
 
-            newFigure.Init(_points[i].position, rotation);
+            newFigure.Init(point.position, rotation);
 
             _spawnedFigures.Add(newFigure);
         }

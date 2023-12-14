@@ -76,13 +76,16 @@ public class FigurePlacement : MonoBehaviour
 
         if (originCell != null)
         {
+            // ѕроходим по всем блокам фигуры и находим дл€ них подход€щие клетки.
             foreach (var item in _figure.GetBlocksByCoordinates())
             {
                 Vector2Int blockCoordinate = item.Key;
                 Block block = item.Value;
 
+                //  оординаты клетки относительно основной.
                 Vector2Int cellCoordinate = originCell.Coordinates + blockCoordinate;
 
+                // ѕроверка на существование клетки.
                 if (!Field.Instance.IsValidCell(cellCoordinate)) break;
 
                 Cell cell = cellMatrix[cellCoordinate.x, cellCoordinate.y];

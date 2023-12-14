@@ -15,9 +15,11 @@ public class DefeatChecker : MonoBehaviour
         Cell[] cells = Field.Instance.GetAllCells();
         List<Figure> figures = FigureSelectionPanel.Instance.GetFigures();
 
+        // Проходим по каждой доступной фигуре.
         foreach (Figure figure in figures)
         {
             FigurePlacement figurePlacement = figure.GetComponent<FigurePlacement>();
+            // Проверка, возможно ли на текущей клетке разместить данную фигуру.
             foreach (Cell cell in cells)
             {
                 bool canPlace = figurePlacement.CanPlace(cell, out Dictionary<Cell, Block> blocksByCell);

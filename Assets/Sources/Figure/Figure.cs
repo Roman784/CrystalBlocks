@@ -6,8 +6,9 @@ using UnityEngine.Events;
 public class Figure : MonoBehaviour
 {
     [SerializeField] private Block[] _blocks;
-    private Dictionary<Vector2Int, Block> _blocksByCoordinates = new Dictionary<Vector2Int, Block>(); // Блоки по координатам относительно основного блока.
-    public Block OriginBlock => _blocks[0]; // Основной блок фигуры, относительно которого всё расчитывается.
+    // Блоки по координатам относительно основного блока.
+    private Dictionary<Vector2Int, Block> _blocksByCoordinates = new Dictionary<Vector2Int, Block>();
+    public Block OriginBlock => _blocks[0]; // Основной блок фигуры, относительно которого производятся все расчёты.
 
     private FigurePlacement _placement;
     private FigureMovement _movement;
@@ -38,10 +39,14 @@ public class Figure : MonoBehaviour
     {
         foreach (Block block in _blocks)
         {
-            Vector2 relativePosition = new Vector2(block.transform.position.x - OriginBlock.transform.position.x, block.transform.position.y - OriginBlock.transform.position.y);
-            Vector2Int coordinate = new Vector2Int(Mathf.RoundToInt(relativePosition.x + relativePosition.y), Mathf.RoundToInt(relativePosition.y - relativePosition.x));
+            Vector2 relativePosition = block.transform.position - OriginBlock.transform.position;
 
-            _blocksByCoordinates.Add(coordinate, block);
+            // Координаты для ромбообразного поля.
+            int coordX = Mathf.RoundToInt(relativePosition.x + relativePosition.y);
+            int coordY = Mathf.RoundToInt(relativePosition.y - relativePosition.x);
+            Vector2Int coordinates = new Vector2Int(coordX, coordY);
+
+            _blocksByCoordinates.Add(coordinates, block);
         }
     }
 

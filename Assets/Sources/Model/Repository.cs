@@ -18,7 +18,6 @@ public class Repository : MonoBehaviour
         try
         {
             string json = JsonUtility.ToJson(GameData, true);
-            Debug.Log("Save json:\n" + json);
             YandexSender.Instance.SaveData(json);
 
             Debug.Log("Save data complete");

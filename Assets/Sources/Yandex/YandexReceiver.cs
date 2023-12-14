@@ -8,11 +8,7 @@ public class YandexReceiver : MonoBehaviour
 
     public void InvokeYSDKInitEvent() => SDKInited.Invoke();
     public void InvokeDataLoadEvent(string data) => DataLoaded.Invoke(data);
-
-    public void OnRewarded()
-    {
-        LineCleaner.Instance?.DestroyMiddleBlocks();
-    }
+    public void OnRewarded() => LineCleaner.Instance?.DestroyMiddleBlocks();
 
     public void StopGame()
     {

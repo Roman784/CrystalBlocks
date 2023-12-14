@@ -22,14 +22,17 @@ public class Field : MonoBehaviour
 
     private void InitField()
     {
+        // Определение размера поля и инициализация матрицы клеток.
         _fieldSize = Mathf.FloorToInt(Mathf.Sqrt(_allCells.Length));
         _cellMatrix = new Cell[_fieldSize, _fieldSize];
 
+        // Заполнение матрицы.
         int cellIndex = 0;
         for (int x = 0; x < _fieldSize; x++)
         {
             for (int y = 0; y < _fieldSize; y++)
             {
+                // Настройка клетки, установка координат и позиции.
                 Vector2 position = new Vector2(x - y, x + y) * _distanceBetweenCells + _cellsPositionOffset;
                 _allCells[cellIndex].Init(new Vector2Int(x, y), position);
 
